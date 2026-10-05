@@ -2,7 +2,7 @@
 
 Plugins that connect Claude, Codex and ChatGPT to [LOGO.com](https://logo.com), so you can look through your logos and create new logo designs from a chat. Every plugin here uses the LOGO.com MCP server at `https://mcp.logo.com/mcp`.
 
-**Status:** in progress. You can install the plugin from this repo's marketplaces in Claude Code, Claude and Codex. It isn't in Claude's or OpenAI's directory yet, so ChatGPT can't install it yet.
+**Status:** in progress. You can install the plugin from this repo's marketplaces in Claude Code, Claude and Codex. It isn't in Claude's or OpenAI's directory yet, so ChatGPT on the web and on mobile can't install it yet.
 
 ## What you'll need
 
@@ -18,7 +18,7 @@ claude plugin marketplace add logocode/logo-plugins
 claude plugin install logo-com@logo-plugins
 ```
 
-Restart Claude Code, run `/mcp`, choose `plugin:logo-com:logo-com` and sign in to LOGO.com.
+In a new session (or after `/reload-plugins`), run `/mcp`, choose `plugin:logo-com:logo-com` and sign in to LOGO.com.
 
 ### Claude (web and desktop)
 
@@ -40,7 +40,7 @@ Then start a new thread. You can also install it from `/plugins` in the Codex CL
 
 ### ChatGPT
 
-Not available yet. ChatGPT will offer the plugin once it's published in OpenAI's plugin directory.
+Not available yet. ChatGPT will offer the plugin once it's published in OpenAI's plugin directory. Until then, the ChatGPT desktop app can read this repo's marketplace from a local clone, but we haven't tested that.
 
 ## What the plugins can do
 

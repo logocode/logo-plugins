@@ -15,16 +15,16 @@ One package under `plugins/logo-com/` serves both hosts. It connects to `https:/
 
 - Read `AGENTS.md` for the layout and the rules.
 - Read the current docs for the host you're changing, because field names and limits change. The links are in `AGENTS.md`.
-- For shape, compare a published plugin that wraps a remote MCP server: [Linear's Claude plugin](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/linear), or Canva's and Linear's Codex plugins, which Codex caches under `~/.codex/plugins/cache/` once you browse the OpenAI catalog.
+- For shape, compare a published plugin that wraps a remote MCP server: [Linear's Claude plugin](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/linear), or Canva's Codex plugin in the `openai-curated` marketplace that Codex clones to `~/.codex/.tmp/plugins/`.
 
 ## Steps
 
 1. **MCP config.** `plugins/logo-com/.mcp.json` holds one server, `logo-com`, inside an `mcpServers` object, with `"type": "http"` and `"url": "https://mcp.logo.com/mcp"`. Both hosts read this one file.
    - Claude's checklist blocks a remote server without a `type` of `http`, `sse` or `ws`. Codex accepts `http`. [Checklist](https://claude.com/docs/plugins/pre-submission-checklist)
-   - Add no headers, tokens or `oauth` block. Each client registers itself with dynamic client registration, and both take the `logos` scope from the server's `WWW-Authenticate` header and protected resource metadata. [Claude](https://claude.com/docs/connectors/building/authentication), [Codex](https://developers.openai.com/codex/mcp)
-   - If Codex sign-in fails because the token's audience is wrong, add `"oauth_resource": "https://mcp.logo.com/mcp"` to the server. OpenAI's own Linear package sets it, and Claude's validator accepts it.
+   - Add no headers, tokens or `oauth` block. Each client registers itself with dynamic client registration, Claude takes the `logos` scope from the server's `WWW-Authenticate` header, and Codex from `scopes_supported` in its protected resource metadata. [Claude](https://claude.com/docs/connectors/building/authentication), [Codex](https://developers.openai.com/codex/mcp)
+   - If Codex sign-in fails because the token's audience is wrong, add `"oauth_resource": "https://mcp.logo.com/mcp"` to the server. The Codex docs don't cover it, but OpenAI's own Linear package sets it and Claude's validator accepts it.
 2. **Claude manifest.** `.claude-plugin/plugin.json`. [Fields](https://code.claude.com/docs/en/plugins/manifest-reference)
-   - Only `name` is required, but claude.ai and Cowork list a plugin only if it has this file. Set `displayName`, `version`, `description`, `author.name`, `homepage` and `repository`.
+   - Only `name` is required, but claude.ai and Cowork list a plugin only if it has this file. Set `displayName`, `version`, `description`, `author.name`, `homepage`, `repository` and `license`.
    - `icon` is the path to the directory icon. Claude Code ignores it. The directory also reads `supportUrl`, `privacyPolicyUrl`, `termsOfServiceUrl` and `documentationUrl`, all https.
    - The checklist needs `license` here or a `LICENSE` file, and a `README.md` of at least 40 words in the plugin folder. Words in code blocks don't count. [Checklist](https://claude.com/docs/plugins/pre-submission-checklist)
    - Raise `version` on every release. Claude Code pins installs to it.
@@ -41,7 +41,7 @@ One package under `plugins/logo-com/` serves both hosts. It connects to `https:/
 6. **Marketplaces.** Both are named `logo-plugins`, so the plugin installs as `logo-com@logo-plugins` in both hosts.
    - `.claude-plugin/marketplace.json` needs `name`, `owner.name`, and `plugins[]` entries with `name` and a `source` starting with `./`. Add a `description`, or validate warns. Some names are reserved. [Reference](https://code.claude.com/docs/en/plugins/marketplace-reference)
    - `.agents/plugins/marketplace.json` has `name`, `interface.displayName`, and entries with `source: {"source": "local", "path": "./plugins/logo-com"}`, `policy.installation` (`AVAILABLE`), `policy.authentication` (`ON_INSTALL` or `ON_USE`) and `category`. [Build](https://developers.openai.com/plugins/build/plugins)
-   - Use the same `category` as the Codex manifest. OpenAI doesn't publish the list of allowed values. Canva, Figma and Adobe use `Creativity`.
+   - Use the same `category` as the Codex manifest. OpenAI doesn't publish the list of allowed values. Canva, Figma and Adobe use `Creativity` in the `openai-curated` marketplace. Confirm it in the dashboard when submitting.
 
 ## Validate
 
@@ -52,7 +52,7 @@ One package under `plugins/logo-com/` serves both hosts. It connects to `https:/
    - Codex: `codex plugin marketplace add ./`, then `codex plugin add logo-com@logo-plugins`.
 4. Sign in with a premium account, then ask for your logos and confirm `list_logos` returns them.
    - Claude Code: run `/mcp` in a session, choose `plugin:logo-com:logo-com` and authenticate.
-   - Codex: `codex mcp login logo-com`, then start a new thread.
+   - Codex: `codex mcp login logo-com`, then start a new thread. The docs describe `mcp login` for servers in `config.toml`, but Codex also resolves the plugin's server by this name.
 
 ## Done when
 
