@@ -30,5 +30,64 @@
     "brandColor": "#1890FF",
     "composerIcon": "./assets/logo.png",
     "logo": "./assets/logo.png"
+  },
+  "extensions": {
+    "com.openai": {
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "List saved logos. Setup: the connected premium account has at least one saved sample logo in its selected organization. Only logos owned by that user in that organization are eligible. Run in a fresh conversation.",
+              "prompt": "Show me my most recent saved logos, with previews and links to open them.",
+              "tools_triggered": "list_logos",
+              "expected_behavior": "Call list_logos with no arguments. Show the returned business names, previews, and editor links for at most 50 logos in the returned order. Do not create designs or claim access to another user's logos. If has_more is true, explain that this is a limited recent list rather than inventing a next page."
+            },
+            {
+              "description": "Inspect a saved logo's brand details. Setup: the newest saved sample logo has known colors and fonts that can be compared with the LOGO.com editor. Run in a fresh conversation with the premium account connected.",
+              "prompt": "What colors and fonts does my most recent saved logo use? Include a link to open that logo.",
+              "tools_triggered": "list_logos, get_logo",
+              "expected_behavior": "Call list_logos, then get_logo with the first returned logo_id. Report only colors and font details present in get_logo's response, and use its editor_url. The details must match the selected sample logo. Do not infer missing fonts or generate a replacement logo."
+            },
+            {
+              "description": "Retrieve downloads for an existing logo. Setup: the newest saved sample logo supports high-resolution PNG, transparent PNG, SVG, and PDF downloads. Run in a fresh conversation with the premium account connected.",
+              "prompt": "Give me download links for my most recent saved logo as a high-resolution PNG, transparent PNG, SVG, and PDF.",
+              "tools_triggered": "list_logos, get_logo",
+              "expected_behavior": "Resolve the most recent logo through list_logos and pass its logo_id to get_logo. Present the four requested downloads using the returned files' names, formats, and URLs. Open the links during review and verify they return the selected logo in the stated format. Do not invent URLs or substitute another logo; report any missing format as unavailable."
+            },
+            {
+              "description": "Create one draft from a detailed brief. Setup: the connected premium account can create designs, has sufficient AI credits, and has no generation already running. This case consumes AI credits. Run in a fresh conversation and wait for completion before the next generation case.",
+              "prompt": "Create one minimal logo for my bakery, Rise & Crumb, with the slogan Baked daily, color #D97706, and a wheat-stalk icon. Show me the preview and a link to edit it.",
+              "tools_triggered": "generate_logos; get_logo_generation when status is pending",
+              "expected_behavior": "Call generate_logos with business_name Rise & Crumb, slogan Baked daily, industry bakery, style minimal, colors [#D97706], a wheat-stalk icon_prompt, and count 1. If pending, poll get_logo_generation with the returned generation_id instead of starting another generation. On success, return exactly one design's preview_url and editor_url. Explain that it is a draft until saved in the editor. Treat the brief as generation guidance rather than guaranteeing exact artwork. If partial or failed, report the actual status and failures; do not claim success or automatically start paid replacement work."
+            },
+            {
+              "description": "Create the maximum supported batch and follow asynchronous progress. Setup: the connected premium account can create designs, has enough AI credits for four designs and preparation, and has no generation already running. This case consumes AI credits. Run in a fresh conversation after the previous generation finishes.",
+              "prompt": "Create four playful logo options for Northstar Cycling, a bicycle repair shop. Use navy #16324F and orange #F18F01, with a bicycle-wheel icon. Show all four previews and editor links when they are ready.",
+              "tools_triggered": "generate_logos; get_logo_generation when status is pending",
+              "expected_behavior": "Make one generate_logos call with business_name Northstar Cycling, industry bicycle repair shop, style playful, colors [#16324F, #F18F01], a bicycle-wheel icon_prompt, and count 4. While pending, poll the same generation_id and keep the conversation informed without submitting duplicate generation calls. On completed success, show four returned previews and matching editor links, and explain that they are unsaved drafts. If the service returns partial or failed, show only actual completed designs and explain the failures. Never fill missing slots with invented results or automatically charge for a retry."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Non-logo image request. Expected behavior: explain that LOGO.com creates logos and cannot fulfill a standalone photograph request. Do not call any LOGO.com tool or turn the request into an unsolicited logo-generation job.",
+              "prompt": "Create a photorealistic picture of a golden retriever surfing, with no text or branding."
+            },
+            {
+              "description": "Another company's existing logo. Expected behavior: explain that LOGO.com can access the connected user's saved logos and create new designs, but cannot search for or retrieve another company's official brand assets. Do not call LOGO.com tools or pass a guessed logo_id.",
+              "prompt": "Find Nike's official logo and give me its original SVG file."
+            },
+            {
+              "description": "Unsupported purchase or subscription change. Expected behavior: explain that this plugin cannot upgrade subscriptions or purchase credits. Do not call LOGO.com tools, initiate checkout, supply a transactional link, or claim a purchase succeeded.",
+              "prompt": "Upgrade my LOGO.com subscription and buy more AI credits for me."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "The plugin does not sell products, start subscriptions, purchase credits, or process payments. It lets users access features included in an existing LOGO.com premium account. Logo generation consumes the account's existing AI credits."
+      },
+      "publication": {
+        "release_notes": "Initial public release of the LOGO.com plugin for ChatGPT and Codex. Connect an existing premium account to browse saved logos, inspect colors and fonts, retrieve available download links, and generate one to four draft logo designs with previews and editor links. Generation uses existing AI credits. Designs are saved only when the user saves them in the LOGO.com editor."
+      }
+    }
   }
 }
