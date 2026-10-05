@@ -1,0 +1,33 @@
+{
+  "name": "logo-com",
+  "version": "0.1.0",
+  "description": "Browse your LOGO.com logos and create new logo designs from a chat. Requires a LOGO.com premium plan.",
+  "author": {
+    "name": "LOGO.com",
+    "url": "https://logo.com"
+  },
+  "homepage": "https://github.com/logocode/logo-plugins",
+  "repository": "https://github.com/logocode/logo-plugins",
+  "keywords": ["logo", "branding", "design"],
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "LOGO.com",
+    "shortDescription": "Browse and create logos",
+    "longDescription": "Connect your LOGO.com account to look through your logos and create new logo designs from a chat.\n\nList your most recent logos with previews and editor links, open one to see its colors, fonts and download files, or describe your business and get up to four new designs. New designs are drafts until you open one in the LOGO.com editor and save it.\n\nRequirements: a LOGO.com premium plan. Creating designs uses your account's AI credits.",
+    "developerName": "LOGO.com",
+    "category": "Creativity",
+    "capabilities": [],
+    "websiteURL": "https://logo.com",
+    "supportURL": "https://help.logo.com",
+    "privacyPolicyURL": "https://logo.com/privacy-policy",
+    "termsOfServiceURL": "https://logo.com/terms-and-conditions",
+    "defaultPrompt": [
+      "Show me my most recent logos",
+      "What colors and fonts does my latest logo use?",
+      "Design a logo for my coffee shop, Bean There"
+    ],
+    "brandColor": "#1890FF",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png"
+  }
+}

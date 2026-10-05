@@ -1,0 +1,15 @@
+{
+  "name": "logo-plugins",
+  "description": "LOGO.com's plugins for Claude.",
+  "owner": {
+    "name": "LOGO.com",
+    "url": "https://logo.com"
+  },
+  "plugins": [
+    {
+      "name": "logo-com",
+      "source": "./plugins/logo-com",
+      "category": "design"
+    }
+  ]
+}

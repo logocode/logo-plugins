@@ -1,0 +1,17 @@
+{
+  "name": "logo-com",
+  "displayName": "LOGO.com",
+  "version": "0.1.0",
+  "description": "Browse your LOGO.com logos and create new logo designs from a chat. Requires a LOGO.com premium plan.",
+  "author": {
+    "name": "LOGO.com",
+    "url": "https://logo.com"
+  },
+  "homepage": "https://github.com/logocode/logo-plugins",
+  "repository": "https://github.com/logocode/logo-plugins",
+  "keywords": ["logo", "branding", "design"],
+  "icon": "./assets/logo.png",
+  "supportUrl": "https://help.logo.com",
+  "privacyPolicyUrl": "https://logo.com/privacy-policy",
+  "termsOfServiceUrl": "https://logo.com/terms-and-conditions"
+}
