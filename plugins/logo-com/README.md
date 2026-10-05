@@ -4,7 +4,7 @@ Connects Claude, Codex and ChatGPT to your [LOGO.com](https://logo.com) account,
 
 ## Requirements
 
-- A LOGO.com premium plan. The tools refuse requests from free accounts.
+- A LOGO.com premium plan ([see plans](https://logo.com/logo-plans)). The tools refuse requests from free accounts.
 - Your LOGO.com sign-in. Your client opens a LOGO.com sign-in page the first time it connects.
 
 ## Tools
@@ -24,6 +24,10 @@ New designs are drafts until you open one in the LOGO.com editor and save it.
 - "What colors and fonts does my latest logo use?"
 - "Design a logo for my coffee shop, Bean There"
 
-## Support
+## Help and links
 
-Visit [help.logo.com](https://help.logo.com). Privacy policy: [logo.com/privacy-policy](https://logo.com/privacy-policy). Terms: [logo.com/terms-and-conditions](https://logo.com/terms-and-conditions).
+- Help: [help.logo.com](https://help.logo.com)
+- Website: [logo.com](https://logo.com)
+- Plans: [logo.com/logo-plans](https://logo.com/logo-plans)
+- Privacy policy: [logo.com/privacy-policy](https://logo.com/privacy-policy)
+- Terms: [logo.com/terms-and-conditions](https://logo.com/terms-and-conditions)
