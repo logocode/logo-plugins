@@ -4,7 +4,7 @@ This public repo publishes LOGO.com's plugins for Claude and for Codex and ChatG
 
 ## Status
 
-Bootstrapped only. No plugin package or marketplace file exists yet. Build them with the `build-plugin` skill.
+The plugin package and both marketplaces exist and install locally in Claude Code and Codex. Nothing is listed in Claude's or OpenAI's directory yet, and `submissions/` doesn't exist yet. Change the package with the `build-plugin` skill.
 
 ## Target layout
 
@@ -43,5 +43,6 @@ Store rules change often. Check the official page before relying on a limit or f
 
 - Claude plugins: [build](https://claude.com/docs/plugins/build), [pre-submission checklist](https://claude.com/docs/plugins/pre-submission-checklist), [submit](https://claude.com/docs/plugins/submit)
 - Claude connectors: [submission](https://claude.com/docs/connectors/building/submission), [review criteria](https://claude.com/docs/connectors/building/review-criteria), [authentication](https://claude.com/docs/connectors/building/authentication)
-- Claude Code: [plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
+- Claude Code: [plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces), [manifest reference](https://code.claude.com/docs/en/plugins/manifest-reference), [marketplace reference](https://code.claude.com/docs/en/plugins/marketplace-reference)
+- Codex: [MCP and OAuth](https://developers.openai.com/codex/mcp)
 - OpenAI: [build plugins](https://developers.openai.com/plugins/build/plugins), [submission](https://developers.openai.com/plugins/deploy/submission), [review](https://developers.openai.com/plugins/deploy/app-review), [guidelines](https://developers.openai.com/plugins/plugin-guidelines)

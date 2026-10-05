@@ -1,0 +1,20 @@
+{
+  "name": "logo-plugins",
+  "interface": {
+    "displayName": "LOGO.com"
+  },
+  "plugins": [
+    {
+      "name": "logo-com",
+      "source": {
+        "source": "local",
+        "path": "./plugins/logo-com"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Creativity"
+    }
+  ]
+}

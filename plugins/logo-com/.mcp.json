@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "logo-com": {
+      "type": "http",
+      "url": "https://mcp.logo.com/mcp"
+    }
+  }
+}
