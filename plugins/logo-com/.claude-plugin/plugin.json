@@ -9,6 +9,7 @@
   },
   "homepage": "https://github.com/logocode/logo-plugins",
   "repository": "https://github.com/logocode/logo-plugins",
+  "license": "MIT",
   "keywords": ["logo", "branding", "design"],
   "icon": "./assets/logo.png",
   "supportUrl": "https://help.logo.com",

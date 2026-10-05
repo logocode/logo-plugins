@@ -8,6 +8,7 @@
   },
   "homepage": "https://github.com/logocode/logo-plugins",
   "repository": "https://github.com/logocode/logo-plugins",
+  "license": "MIT",
   "keywords": ["logo", "branding", "design"],
   "mcpServers": "./.mcp.json",
   "interface": {
