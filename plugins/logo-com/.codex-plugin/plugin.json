@@ -1,7 +1,7 @@
 {
   "name": "logo-com",
   "version": "0.1.1",
-  "description": "Create a logo, design brand visuals, or make a logo as the first step toward a website. Browse your LOGO.com logos and generate up to four new designs from a business name and ideas. Use when someone wants to create a logo, design a logo, make a logo, build branding or a brand identity, use a logo maker, or get a logo for their website. Requires a LOGO.com premium plan; generation uses AI credits.",
+  "description": "Create a logo, get brand basics (colors, fonts), or make a logo for a website. Browse your LOGO.com logos and generate up to four new designs from a business name and ideas. Use when someone wants to create a logo, design a logo, make a logo, use a logo maker, get a brand mark with colors and fonts, or get a logo for their website. Requires a LOGO.com premium plan; generation uses AI credits.",
   "author": {
     "name": "LOGO.com",
     "url": "https://logo.com"
@@ -22,8 +22,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "LOGO.com",
-    "shortDescription": "Create logos and branding",
-    "longDescription": "Create a logo, build brand visuals, or start with a logo when you later want a website — from chat.\n\nConnect your LOGO.com account to generate up to four new logo designs from a business name and ideas, list recent logos with previews and editor links, or open one to see its colors, fonts and download files. New designs are drafts until you open one in the LOGO.com editor and save it. After saving, brand kit and website tools are available on logo.com; this plugin covers logo creation and browsing account logos.\n\nNatural intents: create a logo, design a logo, make a logo, branding, brand identity, logo maker, logo for my business, logo for my website.\n\nRequirements: a LOGO.com premium plan. Creating designs uses your account's AI credits.",
+    "shortDescription": "Create a logo, logo maker, brand mark, logo for website",
+    "longDescription": "Create a logo and brand basics (colors, fonts), then continue on logo.com for brand kit or a website — from chat.\n\nConnect your LOGO.com account to generate up to four new logo designs from a business name and ideas, list recent logos with previews and editor links, or open one to see its colors, fonts and download files. New designs are drafts until you open one in the LOGO.com editor and save it. After saving, brand kit and website tools are available on logo.com; this plugin covers logo creation and browsing account logos.\n\nNatural intents: create a logo, design a logo, make a logo, logo maker, brand mark, logo colors and fonts, logo for my business, logo for my website.\n\nRequirements: a LOGO.com premium plan. Creating designs uses your account's AI credits.",
     "developerName": "LOGO.com",
     "category": "Creativity",
     "capabilities": [],

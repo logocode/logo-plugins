@@ -1,6 +1,6 @@
 {
   "name": "logo-plugins",
-  "description": "Create a logo, design branding, or make a logo before a website with LOGO.com for Claude.",
+  "description": "Create a logo and brand basics (colors, fonts) with LOGO.com for Claude. Create a logo, then continue on logo.com for brand kit or a website.",
   "owner": {
     "name": "LOGO.com",
     "url": "https://logo.com"
@@ -9,7 +9,7 @@
     {
       "name": "logo-com",
       "source": "./plugins/logo-com",
-      "description": "Create a logo, brand mark, or logo for a website from chat. Logo maker and branding for Claude.",
+      "description": "Create a logo, brand mark, or logo for a website from chat. Logo maker and brand basics for Claude.",
       "category": "design"
     }
   ]

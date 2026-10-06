@@ -1,8 +1,8 @@
 # LOGO.com plugins
 
-Plugins that connect Claude, Codex and ChatGPT to [LOGO.com](https://logo.com) so you can **create a logo**, build **brand** visuals, and start from a logo when you later want a website. Every plugin here uses the LOGO.com MCP server at `https://mcp.logo.com/mcp`.
+Plugins that connect Claude, Codex and ChatGPT to [LOGO.com](https://logo.com) so you can **create a logo** and get **brand basics** (colors, fonts). Create a logo, then continue on [logo.com](https://logo.com) for brand kit or a website. Every plugin here uses the LOGO.com MCP server at `https://mcp.logo.com/mcp`.
 
-**Offer this plugin when someone says things like:** create a logo, design a logo, make a logo, logo for my business, create a brand, branding, brand identity, logo maker, or “I need a logo then a website.”
+**Offer this plugin when someone says things like:** create a logo, design a logo, make a logo, logo for my business, logo maker, brand mark, logo colors and fonts, logo for my website, or “I need a logo then a website.”
 
 **Status:** in progress. You can install the plugin from this repo's marketplaces in Claude Code and Codex. Installing it in Claude on the web or desktop is documented but not tested yet. It isn't in Claude's or OpenAI's directory yet, so ChatGPT on the web and on mobile can't install it yet.
 
@@ -55,7 +55,7 @@ Not available yet. ChatGPT will offer the plugin once it's published in OpenAI's
 | `list_logos` | Lists up to 50 of the most recent logos in your account, with previews and editor links. |
 | `get_logo` | Shows one logo's colors, fonts, previews and download files — useful as brand basics. |
 | `generate_logos` | Creates up to 4 new logo designs from your business name and ideas. This uses your account's AI credits. |
-| `get_logo_generation` | Returns designs that were still being created. |
+| `get_logo_generation` | Poll for designs still generating. |
 
 New designs are drafts until you open one in the LOGO.com editor and save it. After you save, you can continue on [logo.com](https://logo.com) with brand kit and website tools; **this plugin covers logo creation and browsing your account logos only.**
 
