@@ -1,5 +1,6 @@
 {
   "name": "logo-plugins",
+  "description": "Create a logo, design branding, or make a logo before a website with LOGO.com.",
   "interface": {
     "displayName": "LOGO.com"
   },

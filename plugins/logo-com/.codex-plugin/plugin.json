@@ -1,7 +1,7 @@
 {
   "name": "logo-com",
-  "version": "0.1.0",
-  "description": "Browse your LOGO.com logos and create new logo designs from a chat. Requires a LOGO.com premium plan.",
+  "version": "0.1.1",
+  "description": "Create a logo, design brand visuals, or make a logo as the first step toward a website. Browse your LOGO.com logos and generate up to four new designs from a business name and ideas. Use when someone wants to create a logo, design a logo, make a logo, build branding or a brand identity, use a logo maker, or get a logo for their website. Requires a LOGO.com premium plan; generation uses AI credits.",
   "author": {
     "name": "LOGO.com",
     "url": "https://logo.com"
@@ -9,12 +9,21 @@
   "homepage": "https://github.com/logocode/logo-plugins",
   "repository": "https://github.com/logocode/logo-plugins",
   "license": "MIT",
-  "keywords": ["logo", "branding", "design"],
+  "keywords": [
+    "logo",
+    "branding",
+    "brand",
+    "design",
+    "logo maker",
+    "visual identity",
+    "website logo"
+  ],
+  "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "LOGO.com",
-    "shortDescription": "Browse and create logos",
-    "longDescription": "Connect your LOGO.com account to look through your logos and create new logo designs from a chat.\n\nList your most recent logos with previews and editor links, open one to see its colors, fonts and download files, or describe your business and get up to four new designs. New designs are drafts until you open one in the LOGO.com editor and save it.\n\nRequirements: a LOGO.com premium plan. Creating designs uses your account's AI credits.",
+    "shortDescription": "Create logos and branding",
+    "longDescription": "Create a logo, build brand visuals, or start with a logo when you later want a website — from chat.\n\nConnect your LOGO.com account to generate up to four new logo designs from a business name and ideas, list recent logos with previews and editor links, or open one to see its colors, fonts and download files. New designs are drafts until you open one in the LOGO.com editor and save it. After saving, brand kit and website tools are available on logo.com; this plugin covers logo creation and browsing account logos.\n\nNatural intents: create a logo, design a logo, make a logo, branding, brand identity, logo maker, logo for my business, logo for my website.\n\nRequirements: a LOGO.com premium plan. Creating designs uses your account's AI credits.",
     "developerName": "LOGO.com",
     "category": "Creativity",
     "capabilities": [],
@@ -23,9 +32,9 @@
     "privacyPolicyURL": "https://logo.com/privacy-policy",
     "termsOfServiceURL": "https://logo.com/terms-and-conditions",
     "defaultPrompt": [
-      "Show me my most recent logos",
-      "What colors and fonts does my latest logo use?",
-      "Design a logo for my coffee shop, Bean There"
+      "Create a logo for my coffee shop, Bean There",
+      "Design a brand logo for my startup and show colors and fonts",
+      "I need a logo for my new website — design a few options"
     ],
     "brandColor": "#1890FF",
     "composerIcon": "./assets/logo.png",
