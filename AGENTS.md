@@ -4,7 +4,7 @@ This public repo publishes LOGO.com's plugins for Claude and for Codex and ChatG
 
 ## Status
 
-The plugin package and both marketplaces exist and install locally in Claude Code and Codex. Nothing is listed in Claude's or OpenAI's directory yet, and `submissions/` doesn't exist yet. Change the package with the `build-plugin` skill.
+The plugin package and both marketplaces exist and install locally in Claude Code and Codex. Nothing is listed in Claude's or OpenAI's directory yet. Draft listing materials are in `submissions/`. Change the package with the `build-plugin` skill.
 
 ## Target layout
 
