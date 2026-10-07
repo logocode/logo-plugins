@@ -14,7 +14,7 @@ Agents prepare and a person submits. Both portals need an organization owner's a
 
 ## Where things go
 
-- **In this repo:** listing copy, example prompts and test cases, in `submissions/claude.md` and `submissions/openai.md`. They become public in the listing anyway.
+- **In this repo:** listing copy, example prompts and test cases, in `submissions/claude-directory.md` and `submissions/openai.md`. They become public in the listing anyway.
 - **Only in the portal:** reviewer credentials, reviewer contact details, and anything else from the portals' private fields.
 
 ## Claude
