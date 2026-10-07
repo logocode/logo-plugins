@@ -92,7 +92,7 @@ Add the verified recording URL as `extensions.com.openai.review.demo_recording_u
 - Confirm actual data practices and policy coverage. Complete legal and policy attestations in the portal.
 - Confirm the server sets `readOnlyHint`, `destructiveHint` and `openWorldHint` explicitly on every tool, as in the table under Capabilities and limits.
 - Confirm the message free accounts get doesn't promote an upgrade or link to checkout. Only a link to an informational plans page is allowed. [Guidelines](https://developers.openai.com/plugins/plugin-guidelines)
-- Settle open PR #3 first. It rewrites the listing copy and bumps the version to 0.1.1, so update the Listing table and release notes to match.
+- Settle open PR #3 first. It rewrites the listing copy and bumps the version to 0.1.1. It merges cleanly with this file's branch as of 2026-10-07, but update the Listing table and release notes to match it.
 
 ## Package and portal handoff
 

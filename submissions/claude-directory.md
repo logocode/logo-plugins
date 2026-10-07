@@ -91,7 +91,7 @@ All seven are required. Notes on the ones that need thought:
 - **Financial transactions.** The tools don't move money or make purchases. `generate_logos` uses AI credits the account already has.
 - **Prompt injection.** Tool descriptions come from the server. Check that none tell Claude to call tools the user didn't ask for, or promote LOGO.com products.
 - **Conversation data.** The server must not log or keep conversation content beyond what the tools need. [Policy 1D](https://support.claude.com/en/articles/13145358-anthropic-software-directory-policy)
-- **Public documentation.** This must be live by the publish date. The plugin README covers the tools, requirements and support, but not yet troubleshooting, which the policy also asks for. [Policy 3C](https://support.claude.com/en/articles/13145358-anthropic-software-directory-policy)
+- **Public documentation.** This must be live by the publish date. The plugin README covers the tools, requirements, troubleshooting and support. [Policy 3C](https://support.claude.com/en/articles/13145358-anthropic-software-directory-policy)
 
 ## 2. Plugin bundle
 
@@ -139,7 +139,6 @@ A plugin with only a connector is complete, but the docs say most product plugin
 - Run the three example prompts and every tool on the reviewer account.
 - Prepare the reviewer account and enter its details only in the portal.
 - Settle PR #3 so the README and `plugin.json` the form reads are final. Then copy the final listing copy into this file.
-- Add a short troubleshooting section to the plugin README, for example what free accounts see and how to reconnect.
 - Confirm the privacy policy covers this integration's data practices before making the acknowledgements.
 - Choose the slug. It can't change after publishing.
 
