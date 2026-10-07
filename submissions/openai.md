@@ -33,6 +33,17 @@ The four public URLs were opened on 2026-10-05 and contain the corresponding LOG
 - Editing and saving occur in the LOGO.com editor. Generated designs are not automatically saved logos.
 - The plugin does not create standalone photos, retrieve another company's official logos, change subscriptions, or sell credits.
 
+Expected annotations, to confirm against the server:
+
+| Tool | `readOnlyHint` | `destructiveHint` | `openWorldHint` |
+| --- | --- | --- | --- |
+| `list_logos` | true | false | false |
+| `get_logo` | true | false | false |
+| `get_logo_generation` | true | false | false |
+| `generate_logos` | false | false | false |
+
+`generate_logos` creates drafts and spends existing AI credits, but deletes and overwrites nothing. Be ready to explain why it isn't marked destructive.
+
 ## Review case checklist
 
 Use the exact prompts and expected results embedded in the manifest. All eight cases still need to be run through the intended host with the dedicated reviewer account. A direct tool smoke test does not prove prompt routing or completion of a review case.
@@ -52,9 +63,8 @@ P4 passes only when the generation completes with one design. P5 passes only whe
 
 Preparation checks completed on 2026-10-05:
 
-- Authenticated `list_logos` and `get_logo` smoke calls succeeded on the existing development connection. The detail response matched the requested logo and returned colors, fonts, and four HTTPS download URLs. Customer content and identifiers are not included here.
+- Authenticated `list_logos` and `get_logo` smoke calls succeeded. The detail response matched the requested logo and returned colors, fonts, and four HTTPS download URLs.
 - Download contents and editor interactions were not tested in that smoke check.
-- The MCP, OAuth, discovery, access-control, and generation-job unit suites passed: 200 tests across eight files. These are local tests with mocked dependencies, not production or reviewer-account end-to-end results.
 - No paid generation was run during preparation. The generation and negative prompt cases remain untested in the intended host.
 
 ## Demo recording plan
@@ -80,7 +90,9 @@ Add the verified recording URL as `extensions.com.openai.review.demo_recording_u
 - Add and verify the demo recording URL.
 - Confirm the verified developer identity and country availability. `publication.countries` is omitted pending that decision; omission is not a declaration of worldwide availability.
 - Confirm actual data practices and policy coverage. Complete legal and policy attestations in the portal.
-- Finish the separate server audit follow-up before submission.
+- Confirm the server sets `readOnlyHint`, `destructiveHint` and `openWorldHint` explicitly on every tool, as in the table under Capabilities and limits.
+- Confirm the message free accounts get doesn't promote an upgrade or link to checkout. Only a link to an informational plans page is allowed. [Guidelines](https://developers.openai.com/plugins/plugin-guidelines)
+- Settle open PR #3 first. It rewrites the listing copy and bumps the version to 0.1.1, so update the Listing table and release notes to match.
 
 ## Package and portal handoff
 

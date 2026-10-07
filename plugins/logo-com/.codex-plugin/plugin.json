@@ -57,23 +57,23 @@
             {
               "description": "Create one draft from a detailed brief. Setup: the connected premium account can create designs, has sufficient AI credits, and has no generation already running. This case consumes AI credits. Run in a fresh conversation and wait for completion before the next generation case.",
               "prompt": "Create one minimal logo for my bakery, Rise & Crumb, with the slogan Baked daily, color #D97706, and a wheat-stalk icon. Show me the preview and a link to edit it.",
-              "tools_triggered": "generate_logos; get_logo_generation when status is pending",
-              "expected_behavior": "Call generate_logos with business_name Rise & Crumb, slogan Baked daily, industry bakery, style minimal, colors [#D97706], a wheat-stalk icon_prompt, and count 1. If pending, poll get_logo_generation with the returned generation_id instead of starting another generation. On success, return exactly one design's preview_url and editor_url. Explain that it is a draft until saved in the editor. Treat the brief as generation guidance rather than guaranteeing exact artwork. If partial or failed, report the actual status and failures; do not claim success or automatically start paid replacement work."
+              "tools_triggered": "generate_logos, get_logo_generation",
+              "expected_behavior": "Call generate_logos once for one design, passing the business name Rise & Crumb, the slogan Baked daily, a minimal style, the color #D97706 and a wheat-stalk icon idea from the prompt. If the job is pending, poll get_logo_generation with the returned job instead of starting another generation. On success, return exactly one design's preview and editor link, and explain that it is a draft until saved in the editor. Treat the brief as guidance rather than guaranteeing exact artwork. If the job is partial or failed, report the actual status; do not claim success or automatically start paid replacement work."
             },
             {
               "description": "Create the maximum supported batch and follow asynchronous progress. Setup: the connected premium account can create designs, has enough AI credits for four designs and preparation, and has no generation already running. This case consumes AI credits. Run in a fresh conversation after the previous generation finishes.",
               "prompt": "Create four playful logo options for Northstar Cycling, a bicycle repair shop. Use navy #16324F and orange #F18F01, with a bicycle-wheel icon. Show all four previews and editor links when they are ready.",
-              "tools_triggered": "generate_logos; get_logo_generation when status is pending",
-              "expected_behavior": "Make one generate_logos call with business_name Northstar Cycling, industry bicycle repair shop, style playful, colors [#16324F, #F18F01], a bicycle-wheel icon_prompt, and count 4. While pending, poll the same generation_id and keep the conversation informed without submitting duplicate generation calls. On completed success, show four returned previews and matching editor links, and explain that they are unsaved drafts. If the service returns partial or failed, show only actual completed designs and explain the failures. Never fill missing slots with invented results or automatically charge for a retry."
+              "tools_triggered": "generate_logos, get_logo_generation",
+              "expected_behavior": "Make one generate_logos call for four designs, passing the business name Northstar Cycling, a bicycle repair shop industry, a playful style, the colors #16324F and #F18F01 and a bicycle-wheel icon idea from the prompt. While pending, poll the same job with get_logo_generation and keep the user informed without starting duplicate generations. On success, show four previews with matching editor links and explain that they are unsaved drafts. If the job is partial or failed, show only the designs that completed and explain the failures. Never invent results or automatically charge for a retry."
             }
           ],
           "negative": [
             {
-              "description": "Non-logo image request. Expected behavior: explain that LOGO.com creates logos and cannot fulfill a standalone photograph request. Do not call any LOGO.com tool or turn the request into an unsolicited logo-generation job.",
+              "description": "Non-logo image request. Expected behavior: no LOGO.com tool is called, because LOGO.com only creates logos. The host may answer with its own capabilities or explain the limit, but must not turn the request into a LOGO.com logo-generation job.",
               "prompt": "Create a photorealistic picture of a golden retriever surfing, with no text or branding."
             },
             {
-              "description": "Another company's existing logo. Expected behavior: explain that LOGO.com can access the connected user's saved logos and create new designs, but cannot search for or retrieve another company's official brand assets. Do not call LOGO.com tools or pass a guessed logo_id.",
+              "description": "Another company's existing logo. Expected behavior: no LOGO.com tool is called, because LOGO.com can only access the connected user's own saved logos. The host may answer with its own capabilities, but must not pass a guessed logo_id or present a LOGO.com result as another company's official asset.",
               "prompt": "Find Nike's official logo and give me its original SVG file."
             },
             {
