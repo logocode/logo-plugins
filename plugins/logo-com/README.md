@@ -24,6 +24,16 @@ New designs are drafts until you open one in the LOGO.com editor and save it.
 - "What colors and fonts does my latest logo use?"
 - "Design a logo for my coffee shop, Bean There"
 
+## Troubleshooting
+
+- **The tools refuse your request.** They need a LOGO.com premium plan. Check your plan at [logo.com](https://logo.com).
+- **Sign-in fails, or the tools stop working.** Sign in again:
+  - Claude Code: run `/mcp`, choose `plugin:logo-com:logo-com` and authenticate.
+  - Claude on the web or desktop: open the plugin's **Connectors** tab, then disconnect and connect LOGO.com.
+  - Codex: run `codex mcp logout logo-com`, then `codex mcp login logo-com`.
+- **Designs are still being created.** Ask again in a moment. Claude or Codex checks the same job instead of starting a new one.
+- **A new design is missing from your account.** New designs are drafts until you open one in the LOGO.com editor and save it.
+
 ## Help and links
 
 - Help: [help.logo.com](https://help.logo.com)
