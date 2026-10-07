@@ -26,12 +26,12 @@ New designs are drafts until you open one in the LOGO.com editor and save it.
 
 ## Troubleshooting
 
-- **The tools refuse your request.** They need a LOGO.com premium plan. Check your plan at [logo.com](https://logo.com).
+- **The tools refuse your request.** They need a LOGO.com premium plan, and creating designs also needs AI credits and permission to create in your organization. Check your account at [logo.com](https://logo.com).
 - **Sign-in fails, or the tools stop working.** Sign in again:
   - Claude Code: run `/mcp`, choose `plugin:logo-com:logo-com` and authenticate.
-  - Claude on the web or desktop: open the plugin's **Connectors** tab, then disconnect and connect LOGO.com.
+  - Claude on the web or desktop: open the plugin's **Connectors** tab and connect LOGO.com again.
   - Codex: run `codex mcp logout logo-com`, then `codex mcp login logo-com`.
-- **Designs are still being created.** Ask again in a moment. Claude or Codex checks the same job instead of starting a new one.
+- **Designs are still being created.** Ask Claude or Codex to check on them in a moment. It should keep checking the same job rather than start a new generation.
 - **A new design is missing from your account.** New designs are drafts until you open one in the LOGO.com editor and save it.
 
 ## Help and links
