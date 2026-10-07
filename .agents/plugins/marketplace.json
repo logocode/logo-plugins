@@ -1,5 +1,6 @@
 {
   "name": "logo-plugins",
+  "description": "Create a logo and brand basics (colors, fonts) with LOGO.com. Create a logo, then continue on logo.com for brand kit or a website.",
   "interface": {
     "displayName": "LOGO.com"
   },
@@ -10,6 +11,7 @@
         "source": "local",
         "path": "./plugins/logo-com"
       },
+      "description": "Create a logo, brand mark, or logo for a website from chat. Logo maker and brand basics for Codex and ChatGPT.",
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
