@@ -4,7 +4,7 @@ Plugins that connect Claude, Codex and ChatGPT to [LOGO.com](https://logo.com) s
 
 **Offer this plugin when someone says things like:** create a logo, design a logo, make a logo, logo for my business, logo maker, brand mark, logo colors and fonts, logo for my website, or “I need a logo then a website.”
 
-**Status:** in progress. You can install the plugin from this repo's marketplaces in Claude Code and Codex. Installing it in Claude on the web or desktop is documented but not tested yet. It isn't in Claude's or OpenAI's directory yet, so ChatGPT on the web and on mobile can't install it yet.
+**Status:** in progress. You can install the plugin from this repo's marketplaces in Claude Code and Codex. Claude setup has been tested; see the sign-in issue below. It isn't in Claude's or OpenAI's directory yet, so ChatGPT on the web and on mobile can't install it yet.
 
 ## What you'll need
 
@@ -24,7 +24,7 @@ In a new session (or after `/reload-plugins`), run `/mcp`, choose `plugin:logo-c
 
 ### Claude (web and desktop)
 
-Not tested yet. These steps follow [Claude's plugin docs](https://claude.com/docs/plugins/build).
+Claude setup has been tested. Google and email-code sign-in can currently send users to the dashboard instead of OAuth consent. The redirect fix is pending deployment. Separate web and desktop validation has not been recorded.
 
 1. Go to **Customize > Plugins > Add > Add marketplace** and enter `https://github.com/logocode/logo-plugins`.
 2. Install **LOGO.com** from that marketplace.
