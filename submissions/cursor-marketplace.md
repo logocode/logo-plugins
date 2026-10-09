@@ -121,6 +121,7 @@ No official JSON schema exists for `.cursor-plugin/plugin.json` or `marketplace.
 - Land ENG-9556 and ENG-9750.
 - With Harrison's OK, run ENG-9751. Sign in from Cursor desktop, Cursor web and Grok Bot with a premium account, run `list_logos`, and record the results here.
 - Check in Cursor's **Customize** that the plugin shows as LOGO.com with its logo and the `create-logo` skill.
+- Get design to approve `assets/logo.svg`, or to export the circular icon as an official SVG to replace it.
 - Get Harrison's OK, then submit under ENG-9753.
 
 ## Review outcome

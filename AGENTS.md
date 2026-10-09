@@ -35,7 +35,7 @@ The plugin package and all three marketplaces exist. The plugin installs locally
 | Skill | Use it to |
 | --- | --- |
 | `build-plugin` (this repo) | Create or change the plugin package or a marketplace file, then validate and install it. |
-| `prepare-store-submission` (this repo) | Prepare or update a listing in Claude's directory or OpenAI's directory. |
+| `prepare-store-submission` (this repo) | Prepare or update a listing in Claude's directory, OpenAI's directory or the Cursor Marketplace. |
 | `mcp-server-dev` (Anthropic) | Check the server against Claude's review criteria. In Claude Code: `/plugin install mcp-server-dev@claude-plugins-official`. |
 | `$plugin-creator` (built into Codex) | Scaffold or validate a Codex manifest. |
 | `chatgpt-app-submission` (OpenAI) | Draft OpenAI review answers and test cases. In a terminal: `codex plugin add openai-developers@openai-curated`. It targets an older submission form, so check its output against the current docs. |
