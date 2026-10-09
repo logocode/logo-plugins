@@ -1,10 +1,10 @@
 # Repository instructions
 
-This public repo publishes LOGO.com's plugins for Claude and for Codex and ChatGPT, plus the self-hosted marketplaces that list them. Every plugin wraps the remote MCP server at `https://mcp.logo.com/mcp`. The server, its tools and its OAuth sign-in live in LOGO.com's private application repo, not here.
+This public repo publishes LOGO.com's plugins for Claude, for Codex and ChatGPT, and for Cursor and Grok Bot, plus the self-hosted marketplaces that list them. Every plugin wraps the remote MCP server at `https://mcp.logo.com/mcp`. The server, its tools and its OAuth sign-in live in LOGO.com's private application repo, not here.
 
 ## Status
 
-The plugin package and both marketplaces exist and install locally in Claude Code and Codex. Nothing is listed in Claude's or OpenAI's directory yet. Draft listing materials are in `submissions/`. Change the package with the `build-plugin` skill.
+The plugin package and all three marketplaces exist. The plugin installs locally in Claude Code and Codex, and Cursor loads a local copy. Nothing is listed in Claude's or OpenAI's directory or the Cursor Marketplace yet. Draft listing materials are in `submissions/`. Change the package with the `build-plugin` skill.
 
 ## Target layout
 
@@ -12,11 +12,14 @@ The plugin package and both marketplaces exist and install locally in Claude Cod
 | --- | --- |
 | `plugins/logo-com/.claude-plugin/plugin.json` | Claude manifest |
 | `plugins/logo-com/.codex-plugin/plugin.json` | Codex and ChatGPT manifest |
-| `plugins/logo-com/.mcp.json` | The MCP server both manifests point at |
+| `plugins/logo-com/.cursor-plugin/plugin.json` | Cursor manifest, which Grok Bot also uses |
+| `plugins/logo-com/.mcp.json` | The MCP server the Claude and Codex manifests point at |
+| `plugins/logo-com/mcp.json` | The same MCP server, where Cursor's docs say to put it |
 | `plugins/logo-com/assets/` | Icons, and screenshots if a store asks for them |
 | `plugins/logo-com/skills/` | Skills shipped to end users, if any |
 | `.claude-plugin/marketplace.json` | Claude Code marketplace for this repo |
 | `.agents/plugins/marketplace.json` | Codex marketplace for this repo |
+| `.cursor-plugin/marketplace.json` | Cursor marketplace for this repo |
 | `submissions/` | Listing copy, example prompts and test cases for each store |
 | `.agents/skills/` | Skills for working on this repo. `.claude/skills` links here, and `CLAUDE.md` links to this file. |
 
@@ -45,4 +48,5 @@ Store rules change often. Check the official page before relying on a limit or f
 - Claude connectors: [submission](https://claude.com/docs/connectors/building/submission), [review criteria](https://claude.com/docs/connectors/building/review-criteria), [authentication](https://claude.com/docs/connectors/building/authentication)
 - Claude Code: [plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces), [manifest reference](https://code.claude.com/docs/en/plugins/manifest-reference), [marketplace reference](https://code.claude.com/docs/en/plugins/marketplace-reference)
 - Codex: [MCP and OAuth](https://developers.openai.com/codex/mcp)
+- Cursor: [plugins](https://cursor.com/docs/plugins), [plugins reference and submission checklist](https://cursor.com/docs/reference/plugins), [MCP](https://cursor.com/docs/mcp), [plugin template](https://github.com/cursor/plugin-template), [Grok Bot plugins](https://cursor.com/help/grok-bot/connect-plugins)
 - OpenAI: [build plugins](https://developers.openai.com/plugins/build/plugins), [submission](https://developers.openai.com/plugins/deploy/submission), [review](https://developers.openai.com/plugins/deploy/app-review), [guidelines](https://developers.openai.com/plugins/plugin-guidelines)

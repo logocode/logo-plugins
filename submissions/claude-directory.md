@@ -127,7 +127,7 @@ Checked on 2026-10-07 against the [pre-submission checklist](https://claude.com/
 | `description`, `author` and `version` set | Pass |
 | Remote server has `type: http` and an absolute `https://` URL | Pass |
 | Only regular files: no symlinks, submodules or LFS pointers in the plugin folder | Pass |
-| File types: JSON, Markdown and one PNG. No `.ico` | Pass |
+| File types: JSON, Markdown, one PNG and one SVG. No `.ico` | Pass. The SVG, added on 2026-10-09 for Cursor, passes strict validation. |
 | No secrets or credentials | Pass |
 
 A plugin with only a connector is complete, but the docs say most product plugins also ship skills. [What to build](https://claude.com/docs/connectors/building/what-to-build) Decide on PR #3, which adds a `create-logo` skill, before submitting.

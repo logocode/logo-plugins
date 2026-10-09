@@ -1,6 +1,6 @@
 # LOGO.com
 
-Create a logo and brand basics (colors, fonts) from Claude, Codex, or ChatGPT. This plugin connects to your [LOGO.com](https://logo.com) account through one remote MCP server, `https://mcp.logo.com/mcp`. Create a logo here, then continue on [logo.com](https://logo.com) for brand kit or a website.
+Create a logo and brand basics (colors, fonts) from Claude, Codex, ChatGPT, or Cursor. This plugin connects to your [LOGO.com](https://logo.com) account through one remote MCP server, `https://mcp.logo.com/mcp`. Create a logo here, then continue on [logo.com](https://logo.com) for brand kit or a website.
 
 **Use it when the user wants to:** create a logo, design a logo, make a logo for a business, generate logo ideas, get a brand mark with colors and fonts, or create a logo for a website.
 
@@ -26,6 +26,10 @@ New designs are drafts until you open one in the LOGO.com editor and save it. We
 - "Design a brand logo for my startup and show the colors and fonts"
 - "I need a logo for my new website — design a few options"
 
+## Cursor and Grok Bot
+
+The plugin isn't in the Cursor Marketplace yet. Once it's listed, install LOGO.com from **Customize** in Cursor, or from **Plugins** in Grok Bot. Until then, copy this folder to `~/.cursor/plugins/local/logo-com` and Cursor loads it; see the [repo README](https://github.com/logocode/logo-plugins#cursor-and-grok-bot). Sign in to the `logo-com` MCP server the first time you use it.
+
 ## Troubleshooting
 
 - **The tools refuse your request.** They need a LOGO.com premium plan, and creating designs also needs AI credits and permission to create in your organization. Check your account at [logo.com](https://logo.com).
@@ -33,6 +37,7 @@ New designs are drafts until you open one in the LOGO.com editor and save it. We
   - Claude Code: run `/mcp`, choose `plugin:logo-com:logo-com` and authenticate.
   - Claude on the web or desktop: open the plugin's **Connectors** tab and connect LOGO.com again.
   - Codex: run `codex mcp logout logo-com`, then `codex mcp login logo-com`.
+  - Cursor or Grok Bot: open the plugin in **Customize** in Cursor, or **Plugins** in Grok Bot, and sign in again.
 - **Designs are still being created.** Ask Claude or Codex to check on them in a moment. It should keep checking the same job rather than start a new generation.
 - **A new design is missing from your account.** New designs are drafts until you open one in the LOGO.com editor and save it.
 
