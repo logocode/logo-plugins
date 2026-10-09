@@ -1,0 +1,22 @@
+{
+  "name": "logo-com",
+  "displayName": "LOGO.com",
+  "version": "0.1.1",
+  "description": "Create a logo, get brand basics (colors, fonts), or make a logo for a website. Browse your LOGO.com logos and generate new designs from a chat. Use for: create a logo, design a logo, make a logo, logo maker, brand mark, logo for my business, logo for my website. Requires a LOGO.com premium plan.",
+  "author": {
+    "name": "LOGO.com"
+  },
+  "homepage": "https://logo.com",
+  "repository": "https://github.com/logocode/logo-plugins",
+  "license": "MIT",
+  "keywords": [
+    "logo",
+    "branding",
+    "brand",
+    "design",
+    "logo maker",
+    "visual identity",
+    "website logo"
+  ],
+  "logo": "assets/logo.svg"
+}
