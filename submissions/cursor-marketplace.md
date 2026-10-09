@@ -26,7 +26,7 @@ Cursor merges `plugins/logo-com/.cursor-plugin/plugin.json` over the marketplace
 | Field | Value |
 | - | - |
 | `name` | `logo-com` |
-| `displayName` | LOGO.com. The reference doesn't list this field, but Cursor's plugin template sets it and Cursor 3.24 reads it. |
+| `displayName` | LOGO.com. The reference doesn't list this field, but Cursor's plugin template sets it and Cursor 3.24.9 reads it. |
 | `description` | Create a logo, get brand basics (colors, fonts), or make a logo for a website. Browse your LOGO.com logos and generate new designs from a chat. Use for: create a logo, design a logo, make a logo, logo maker, brand mark, logo for my business, logo for my website. Requires a LOGO.com premium plan. |
 | `version` | 0.1.1, the same as the Claude and Codex manifests |
 | `author` | LOGO.com |
