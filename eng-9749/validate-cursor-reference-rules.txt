@@ -1,0 +1,50 @@
+Throwaway checker (not committed) for reference rules the template validator skips.
+$ python3 -I check_cursor_plugin.py <repo-root>
+PASS manifest name 'logo-com' is lowercase kebab-case
+PASS manifest name is the permanent 'logo-com'
+PASS manifest has no fields outside the reference except displayName (extra: ['displayName'])
+NOTE displayName is not in the reference table; cursor/plugin-template sets it and Cursor 3.24.9 reads it
+PASS author has name, and only name/email
+PASS manifest sets description
+PASS manifest sets version
+PASS manifest sets homepage
+PASS manifest sets repository
+PASS manifest sets license
+PASS manifest sets keywords
+PASS manifest sets logo
+PASS version is semver
+PASS version matches plugins/logo-com/.claude-plugin/plugin.json
+PASS version matches plugins/logo-com/.codex-plugin/plugin.json
+PASS logo path 'assets/logo.svg' is relative with no '..'
+PASS logo path 'assets/logo.svg' exists
+PASS manifest leaves mcpServers out, so Cursor discovers plugin-root mcp.json
+PASS mcp.json has only mcpServers
+PASS mcp.json defines exactly one server, logo-com
+PASS logo-com server is just the url https://mcp.logo.com/mcp (got {'url': 'https://mcp.logo.com/mcp'})
+PASS mcp.json uses no ${VAR}, so the manifest needs no variables schema
+PASS .mcp.json (Claude, Codex) and mcp.json (Cursor) name the same server and URL
+PASS logo.svg is square (viewBox 0 0 180 180)
+PASS logo.svg width equals height
+PASS logo.svg has no script, image, foreignObject, use, style or link elements (tags: ['circle', 'path', 'svg', 'title'])
+PASS logo.svg has no href, url(), @import or event handlers
+PASS logo.svg is small (2325 bytes)
+PASS skill create-logo: frontmatter name matches folder and is kebab-case
+PASS skill create-logo: has a description (542 chars)
+PASS skill create-logo: frontmatter has only name and description
+PASS marketplace name 'logo-plugins' is kebab-case
+PASS marketplace owner.name set
+PASS marketplace plugin names unique
+PASS marketplace source './plugins/logo-com' is relative with no '..'
+PASS marketplace source './plugins/logo-com' has .cursor-plugin/plugin.json
+PASS marketplace entry name matches manifest name
+PASS marketplace.json is at most 10 MB
+PASS marketplace name matches .claude-plugin/marketplace.json
+PASS marketplace name matches .agents/plugins/marketplace.json
+PASS plugin README.md documents usage (493 words outside code blocks)
+PASS no secret-like strings in plugins/logo-com/.cursor-plugin/plugin.json
+PASS no secret-like strings in plugins/logo-com/mcp.json
+PASS no secret-like strings in .cursor-plugin/marketplace.json
+PASS no secret-like strings in plugins/logo-com/assets/logo.svg
+
+44 passed, 0 failed
+exit code: 0

@@ -1,0 +1,2 @@
+logo.png vs rendered logo.svg at 180x180: mean abs diff 0.439/255 per channel; pixels differing by >64 in any channel: 68/32400 (0.21%)
+wrote /tmp/eng-9749-evidence/logo-svg-vs-png.png

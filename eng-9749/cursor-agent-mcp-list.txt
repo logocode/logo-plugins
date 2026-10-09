@@ -1,0 +1,6 @@
+$ cursor-agent --version
+2025.09.17-25b418f
+$ cursor-agent mcp list   (run from the repo root; output of other servers omitted for privacy)
+lines mentioning logo: 0
+exit 0
+Help text for this build: 'mcp login <identifier>  Authenticate with an MCP server configured in .cursor/mcp.json or ~/.cursor/mcp.json'. It does not read plugins, so logo-com is not listed.

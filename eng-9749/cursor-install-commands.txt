@@ -1,0 +1,25 @@
+# Test install, 2026-10-09T18:08:55Z, from c5ec507 + working tree
++(eval):1> mkdir -p ~/.cursor/plugins/local/logo-com
++(eval):1> rsync -a --exclude .mcp.json ./plugins/logo-com/ ~/.cursor/plugins/local/logo-com/
++(eval):1> printf '{\n  "mcpServers": {\n    "logo-com": {\n      "url": "http://127.0.0.1:47821/mcp"\n    }\n  }\n}\n'
++(eval):1> set +x
+~/.cursor/plugins/local/logo-com/.claude-plugin/plugin.json
+~/.cursor/plugins/local/logo-com/.codex-plugin/plugin.json
+~/.cursor/plugins/local/logo-com/.cursor-plugin/plugin.json
+~/.cursor/plugins/local/logo-com/assets/logo.png
+~/.cursor/plugins/local/logo-com/assets/logo.svg
+~/.cursor/plugins/local/logo-com/mcp.json
+~/.cursor/plugins/local/logo-com/README.md
+~/.cursor/plugins/local/logo-com/skills/create-logo/SKILL.md
+confirmed: no .mcp.json in the test copy
+# Post-test cleanup, 2026-10-09T18:10:53Z: remove the test-only mcp.json so the copy left installed has no MCP server
++(eval):1> rm ~/.cursor/plugins/local/logo-com/mcp.json
++(eval):1> set +x
+~/.cursor/plugins/local/logo-com/.claude-plugin/plugin.json
+~/.cursor/plugins/local/logo-com/.codex-plugin/plugin.json
+~/.cursor/plugins/local/logo-com/.cursor-plugin/plugin.json
+~/.cursor/plugins/local/logo-com/assets/logo.png
+~/.cursor/plugins/local/logo-com/assets/logo.svg
+~/.cursor/plugins/local/logo-com/README.md
+~/.cursor/plugins/local/logo-com/skills/create-logo/SKILL.md
+files named *mcp* remaining: 0

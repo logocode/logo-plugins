@@ -1,0 +1,39 @@
+# Cursor 3.24.9 logs, local test of plugins/logo-com (test copy: no .mcp.json; mcp.json url -> local mock http://127.0.0.1:47821/mcp)
+# Source: ~/Library/Application Support/Cursor/logs/20261008T171051/
+
+## window2_wb0/exthost/anysphere.cursor-agent-exec/Cursor Plugins.*.log (logo-com and reload summary lines)
+2026-10-09 11:08:56.737 [info] [2026-10-09T18:08:56.736Z] [info] loadUserLocalPlugin logo-com loaded in 3.0ms
+2026-10-09 11:08:57.765 [info] [2026-10-09T18:08:57.765Z] [info] loadAllPlugins completed in 1036.5ms (claude=true, userLocal=true, marketplace=2 sources, total=10 plugins, failures=0, sourceUnavailable=false)
+2026-10-09 11:08:57.765 [info] [2026-10-09T18:08:57.765Z] [info] Plugins reload completed: 10 plugins loaded (0 extension, 0 retained), 0 failures
+2026-10-09 11:08:57.807 [info] [2026-10-09T18:08:57.807Z] [info] loadUserLocalPlugin logo-com loaded in 5.4ms
+2026-10-09 11:08:59.683 [info] [2026-10-09T18:08:59.683Z] [info] loadAllPlugins completed in 1885.9ms (claude=true, userLocal=true, marketplace=2 sources, total=10 plugins, failures=0, sourceUnavailable=false)
+2026-10-09 11:08:59.683 [info] [2026-10-09T18:08:59.683Z] [info] Plugins reload completed: 10 plugins loaded (0 extension, 0 retained), 0 failures
+2026-10-09 11:08:59.735 [info] [2026-10-09T18:08:59.735Z] [info] loadUserLocalPlugin logo-com loaded in 46.1ms
+2026-10-09 11:08:59.735 [info] [2026-10-09T18:08:59.735Z] [info] loadAllPlugins completed in 47.1ms (claude=true, userLocal=true, marketplace=2 sources, total=10 plugins, failures=0, sourceUnavailable=false)
+2026-10-09 11:08:59.735 [info] [2026-10-09T18:08:59.735Z] [info] Plugins reload completed: 10 plugins loaded (0 extension, 0 retained), 0 failures
+2026-10-09 11:10:54.433 [info] [2026-10-09T18:10:54.433Z] [info] loadUserLocalPlugin logo-com loaded in 2.1ms
+2026-10-09 11:10:55.202 [info] [2026-10-09T18:10:55.202Z] [info] loadAllPlugins completed in 773.3ms (claude=true, userLocal=true, marketplace=2 sources, total=10 plugins, failures=0, sourceUnavailable=false)
+2026-10-09 11:10:55.202 [info] [2026-10-09T18:10:55.202Z] [info] Plugins reload completed: 10 plugins loaded (0 extension, 0 retained), 0 failures
+2026-10-09 11:10:55.244 [info] [2026-10-09T18:10:55.244Z] [info] loadUserLocalPlugin logo-com loaded in 4.2ms
+2026-10-09 11:10:57.695 [info] [2026-10-09T18:10:57.695Z] [info] loadAllPlugins completed in 2458.1ms (claude=true, userLocal=true, marketplace=2 sources, total=10 plugins, failures=0, sourceUnavailable=false)
+2026-10-09 11:10:57.695 [info] [2026-10-09T18:10:57.695Z] [info] Plugins reload completed: 10 plugins loaded (0 extension, 0 retained), 0 failures
+
+## mcp-server-plugin-logo-com-logo-com.log
+2026-10-09 11:08:59.736 [info] connecting streamableHttp for "logo-com" (plugin-logo-com-logo-com)
+2026-10-09 11:08:59.736 [info] [V2 FSM] connection:connect_start: conn=idle,auth=unknown -> conn=connecting,auth=unknown
+2026-10-09 11:08:59.785 [info] MCP OAuth redirect
+2026-10-09 11:08:59.785 [info] Connect failed after auth_required; returning needsAuth (streamableHttp)
+2026-10-09 11:08:59.786 [info] MCP OAuth needsAuth (v2)
+
+## window2_wb0/mcp-server-plugin-logo-com-logo-com.workbench.log
+2026-10-09 11:08:59.733 [info] [MCPService] createClient: identifier="plugin-logo-com-logo-com", serverName="logo-com"
+2026-10-09 11:08:59.733 [info] [MCPService] createClient: identifier="plugin-logo-com-logo-com", serverName="logo-com"
+2026-10-09 11:08:59.733 [info] [MCPService] createClient completed for server: plugin-logo-com-logo-com, statusType=initializing, success=true
+2026-10-09 11:08:59.757 [info] [MCPService] createClient completed for server: plugin-logo-com-logo-com, statusType=initializing, success=true
+
+## Mcp FileSystem Writer (server added with the mcp_auth tool, then removed after cleanup)
+2026-10-09 11:08:59.892 [info] Incremental write: 1 changed, 0 removed, 14 unchanged {"changedServerCount":1,"changedServers":[{"serverIdentifier":"plugin-logo-com-logo-com","sanitizedId":"plugin-logo-com-logo-com","toolCount":1}],"removedServerCount":0,"remov
+2026-10-09 11:10:59.040 [info] Incremental write: 0 changed, 1 removed, 14 unchanged {"changedServerCount":0,"changedServers":[],"removedServerCount":1,"removedServerSanitizedIds":["plugin-logo-com-logo-com"],"unchangedServerCount":14,"totalServerCount":14,"le
+
+## ~/.cursor/projects/empty-window/mcps/plugin-logo-com-logo-com/STATUS.md (captured 11:09 local, before cleanup)
+The MCP server needs authentication. You must call the `mcp_auth` tool for server "plugin-logo-com-logo-com" through your MCP tool-calling interface using an empty arguments object `{}` soon so the user can access all of the tools this MCP server offers.

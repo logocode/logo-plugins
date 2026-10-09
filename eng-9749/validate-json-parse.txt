@@ -1,0 +1,9 @@
+$ python3 -m json.tool <file>   (every manifest, marketplace and MCP file)
+parsed OK: .claude-plugin/marketplace.json
+parsed OK: .agents/plugins/marketplace.json
+parsed OK: .cursor-plugin/marketplace.json
+parsed OK: plugins/logo-com/.claude-plugin/plugin.json
+parsed OK: plugins/logo-com/.codex-plugin/plugin.json
+parsed OK: plugins/logo-com/.cursor-plugin/plugin.json
+parsed OK: plugins/logo-com/.mcp.json
+parsed OK: plugins/logo-com/mcp.json
