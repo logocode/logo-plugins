@@ -1,0 +1,16 @@
+{
+  "name": "logo-plugins",
+  "owner": {
+    "name": "LOGO.com"
+  },
+  "metadata": {
+    "description": "Create a logo and brand basics (colors, fonts) with LOGO.com for Cursor. Create a logo, then continue on logo.com for brand kit or a website."
+  },
+  "plugins": [
+    {
+      "name": "logo-com",
+      "source": "./plugins/logo-com",
+      "description": "Create a logo, brand mark, or logo for a website from chat. Logo maker and brand basics for Cursor."
+    }
+  ]
+}
