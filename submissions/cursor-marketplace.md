@@ -109,13 +109,13 @@ Cursor registers a client as soon as it loads the plugin, before anyone clicks t
 - ENG-9750: done. Production deployment evidence exists for the change that resumes OAuth consent after sign-in. A fresh Google/email-code round trip remains part of ENG-9751 verification.
 - ENG-9751: authorized by Harrison and in progress. Creating the test connections, completing OAuth, and finishing the marketplace submission after verification are authorized.
 
-On 2026-10-13, Cursor web added a personal `logo-com` HTTP MCP connection to `https://mcp.logo.com/mcp`. Its Login action reached LOGO.com's production consent screen with `https://www.cursor.com/agents/mcp/oauth/callback`, S256 PKCE, and the `logos account:read offline_access` scopes. On 2026-10-14, Harrison confirmed signing into the reviewer account. Cursor web showed the connection Online, and a dedicated verification agent successfully called `list_logos` through `logo-com`, returning zero logos. This verifies authenticated tool access. The account's premium entitlement and the sign-in-to-consent transition were not independently observed.
+On 2026-10-13, Cursor web added a personal `logo-com` HTTP MCP connection to `https://mcp.logo.com/mcp`. Its Login action reached LOGO.com's production consent screen with `https://www.cursor.com/agents/mcp/oauth/callback`, S256 PKCE, and the `logos account:read offline_access` scopes. On 2026-10-14, Harrison confirmed signing into the reviewer account. Cursor web showed the connection Online, and a dedicated verification agent successfully called `list_logos` through `logo-com`, returning zero logos. The reviewer identity and active Brand trial were subsequently confirmed in the account UI. Current production source treats that trial as premium for `list_logos`; a paid subscription was not verified. The sign-in-to-consent transition was not independently observed.
 
 | Client | OAuth result | `list_logos` result |
 | - | - | - |
-| Cursor desktop 3.24.12 | Production MCP configuration installed in the local plugin; sign-in not completed. Native UI automation encountered capture/window errors and an unresponsive workspace control. | Not run |
+| Cursor desktop | Production MCP configuration installed in the local plugin. A fresh local IDE window opened the task worktree and Cursor Settings after an automation reset. Screen-capture errors recurred before MCP sign-in. | Not run |
 | Cursor web | Authenticated connection Online after Harrison's reviewer sign-in. Tokens were not inspected. | Pass: `list_logos` through `logo-com` returned zero logos on 2026-10-14. |
-| Grok Bot | Dedicated test bot received the prompt. It reported that adding the MCP connection timed out after about 14 minutes and that the connection was absent. OAuth did not start. Verification stopped on this failure. | Not run |
+| Grok Bot | The first connection setup timed out after about 14 minutes. On the authorized retry, the bot reported that setup was cut off after about four minutes and the new connection was still absent. Neither attempt reached OAuth. Verification stopped after the second failure. | Not run |
 
 Cursor web supports personal HTTP MCP connections from its MCP menu. This lets the server authentication be tested before the marketplace package is published. [Cloud Agent capabilities](https://cursor.com/docs/cloud-agent/capabilities#MCP-tools)
 
@@ -141,7 +141,7 @@ No official JSON schema exists for `.cursor-plugin/plugin.json` or `marketplace.
 
 ## Remaining before submission
 
-- Finish ENG-9751 with the intended premium account. Complete OAuth and run `list_logos` from Cursor desktop and Grok Bot, and observe a fresh sign-in that returns to consent. Cursor web's authenticated `list_logos` call passed; premium entitlement was not independently checked.
+- Finish ENG-9751 with the intended premium account. Complete OAuth and run `list_logos` from Cursor desktop and Grok Bot, and observe a fresh sign-in that returns to consent. Cursor web's authenticated `list_logos` call passed with a reviewer account on an active Brand trial, which qualifies for premium MCP access.
 - Resolve or accept the local `Logo Com` display-name discrepancy. Harrison requested continuation after this finding; it is not blocking the remaining checks.
 - Design note: `assets/logo.svg` still needs design approval. Its rendering has no obvious visual defect, so this note does not block verification.
 - Confirm the publisher handle and contact details at submission time.
