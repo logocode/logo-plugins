@@ -1,10 +1,10 @@
 # LOGO.com Cursor Marketplace materials
 
-Status: **NOT SUBMITTED.** Draft materials prepared on 2026-10-09. Submitting is gated on ENG-9753 and Harrison's OK. Don't submit at cursor.com/marketplace/publish before both.
+Status: **NOT SUBMITTED.** Updated on 2026-10-13. ENG-9556 and ENG-9750 are done. ENG-9751 production OAuth verification is in progress. Do not submit under ENG-9753 until the remaining verification is complete and Harrison authorizes submission.
 
 Cursor lists plugins from public Git repositories, and its team reviews each plugin and each update by hand. You submit the repository link at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish). [Plugins](https://cursor.com/docs/plugins), [Reference](https://cursor.com/docs/reference/plugins)
 
-Grok Bot installs plugins from the Cursor Marketplace and follows the team's Cursor connector policy, so this one listing covers Grok Bot too. Grok Bot has no documented way for a user to add a server by URL. [Grok Bot for teams](https://cursor.com/docs/grok-bot/teams), [Connect plugins](https://cursor.com/help/grok-bot/connect-plugins)
+Grok Bot installs plugins from the Cursor Marketplace and follows the team's Cursor connector policy, so this one listing covers Grok Bot too. Cursor staff also describes adding a custom MCP URL through a bot conversation. That provides a possible OAuth test before publication; it does not verify marketplace installation. This custom-MCP path has not yet been tested for LOGO.com. [Grok Bot for teams](https://cursor.com/docs/grok-bot/teams), [Connect plugins](https://cursor.com/help/grok-bot/connect-plugins), [Cursor staff guidance](https://forum.cursor.com/t/grokbot-custom-connectors/169965/5)
 
 ## Submission
 
@@ -17,7 +17,20 @@ Grok Bot installs plugins from the Cursor Marketplace and follows the team's Cur
 | Plugin name | `logo-com`, permanent once published |
 | Branch | `main` |
 
-The docs don't describe the publish form's fields. Record them here when you submit.
+The signed-in publish form was inspected without editing or submitting it on 2026-10-13. It is titled **Become a plugin publisher** and exposes these fields. Values below are a draft, not a submitted application.
+
+| Form field | Draft value |
+| - | - |
+| Organization name | LOGO.com |
+| Organization handle | `logo-com`, proposed to meet the form's kebab-case guidance. The form currently prefills `logo.com`; namespace availability is unverified. |
+| Contact email | Use the submitter's contact address in the portal. Keep it out of this public repository. |
+| Logotype URL | https://raw.githubusercontent.com/logocode/logo-plugins/main/plugins/logo-com/assets/logo.svg. The file exists on `main`. The form asks for a 1:1 SVG or PNG with a background plate. |
+| Description | Create logos with LOGO.com, browse your existing designs, and get brand colors and fonts from chat. Requires a LOGO.com premium plan. |
+| GitHub repository | https://github.com/logocode/logo-plugins |
+| Owner | Team · LOGO.com, shown as a disabled field |
+| Website URL | https://logo.com |
+
+The final **Submit Application** action accepts Cursor's Publisher Terms. It was not clicked. [Publish form](https://cursor.com/marketplace/publish)
 
 ## Listing
 
@@ -26,7 +39,7 @@ Cursor merges `plugins/logo-com/.cursor-plugin/plugin.json` over the marketplace
 | Field | Value |
 | - | - |
 | `name` | `logo-com` |
-| `displayName` | LOGO.com. The reference doesn't list this field, but Cursor's plugin template sets it and Cursor 3.24.9 reads it. |
+| `displayName` | `LOGO.com` in the manifest. Cursor 3.24.12 Customize displays the local package as `Logo Com`; this remains a recorded discrepancy while verification continues. |
 | `description` | Create a logo, get brand basics (colors, fonts), or make a logo for a website. Browse your LOGO.com logos and generate new designs from a chat. Use for: create a logo, design a logo, make a logo, logo maker, brand mark, logo for my business, logo for my website. Requires a LOGO.com premium plan. |
 | `version` | 0.1.1, the same as the Claude and Codex manifests |
 | `author` | LOGO.com |
@@ -90,15 +103,25 @@ Cursor would skip registration and use its client ID metadata document, `https:/
 
 Cursor registers a client as soon as it loads the plugin, before anyone clicks to sign in. So installing the plugin creates a client registration at `https://logo.com` even if the user never signs in.
 
-### Dependencies
+### Dependencies and production verification
 
-- ENG-9556: the redirect allowlist for dynamic client registration must accept Cursor's redirect URIs. If it rejects any URI in the request, the whole registration fails.
-- ENG-9750: Google and email-code sign-in must return to the OAuth consent screen instead of the dashboard.
-- ENG-9751: sign in and run `list_logos` from Cursor desktop, Cursor web and Grok Bot, and record the results here. It creates a production client, so it needs Harrison's OK.
+- ENG-9556: done. The deployed allowlist accepts the documented Cursor web callback and desktop loopback callback. If it rejects any URI in a registration request, the whole registration fails.
+- ENG-9750: done. Production deployment evidence exists for the change that resumes OAuth consent after sign-in. A fresh Google/email-code round trip remains part of ENG-9751 verification.
+- ENG-9751: authorized by Harrison and in progress. Creating the test connections and completing OAuth are authorized. Marketplace submission is not authorized.
+
+On 2026-10-13, Cursor web added a personal `logo-com` HTTP MCP connection to `https://mcp.logo.com/mcp`. Its Login action reached LOGO.com's production consent screen with `https://www.cursor.com/agents/mcp/oauth/callback`, S256 PKCE, and the `logos account:read offline_access` scopes. Consent is pending confirmation of the intended premium test account. No authorization code exchange or `list_logos` result has been verified yet.
+
+| Client | OAuth result | `list_logos` result |
+| - | - | - |
+| Cursor desktop 3.24.12 | Production MCP configuration installed in the local plugin; sign-in not completed. Desktop UI automation encountered capture/window errors. | Not run |
+| Cursor web | Registration and authorization request reached production consent; premium-account confirmation pending. | Not run |
+| Grok Bot | Not run | Not run |
+
+Cursor web supports personal HTTP MCP connections from its MCP menu. This lets the server authentication be tested before the marketplace package is published. [Cloud Agent capabilities](https://cursor.com/docs/cloud-agent/capabilities#MCP-tools)
 
 ## Submission checklist
 
-Checked on 2026-10-09 against the [submission checklist](https://cursor.com/docs/reference/plugins) and with Cursor's template validator, `scripts/validate-template.mjs` from [cursor/plugin-template](https://github.com/cursor/plugin-template) at commit `46216072`.
+Package validation rerun on 2026-10-13. Both `claude plugin validate --strict ./plugins/logo-com` and `claude plugin validate --strict .` passed. Cursor's template validator, `scripts/validate-template.mjs` from [cursor/plugin-template](https://github.com/cursor/plugin-template) at commit `46216072ac5750f782f95bb325b4d12b7c3ae9c9`, passed with the expected missing-hooks warning. The Claude plugin validator also advised adding a one-step marketplace installation line to the README; that advisory did not fail validation. [Submission checklist](https://cursor.com/docs/reference/plugins)
 
 | Item | Status |
 | - | - |
@@ -111,18 +134,18 @@ Checked on 2026-10-09 against the [submission checklist](https://cursor.com/docs
 | Agent Plugins conform to the Agent Plugins schemas | Not applicable. This is a Cursor Plugin, not an Agent Plugin with a root `plugin.json`. |
 | Every `${VAR}` in `mcp.json` is declared in the manifest | Not applicable. `mcp.json` has no variables. |
 | Manifest paths are relative, with no `..` or absolute paths | Pass |
-| Tested locally | Partly. Cursor 3.24.9 loaded the plugin from `~/.cursor/plugins/local/logo-com`. It found the `logo-com` server and showed it as needing authentication. That test pointed `mcp.json` at a local stand-in, because loading the real URL registers a production client (ENG-9751). The skill and logo in **Customize** weren't checked by eye, because screenshots were blocked. |
+| Tested locally | Partly. Cursor 3.24.12 Customize shows the blue and white logo and `create-logo` skill. The heading is `Logo Com` despite `displayName: LOGO.com`. The installed manifest, skill, and SVG match this branch. Both production MCP configuration files are now installed locally, but desktop OAuth and `list_logos` remain unverified. |
 | Repo has `.cursor-plugin/marketplace.json` at its root with unique plugin names | Pass |
 
 No official JSON schema exists for `.cursor-plugin/plugin.json` or `marketplace.json`. The [Agent Plugins schemas](https://agent-plugins.org/schemas) cover the root `plugin.json` format, which this package doesn't use.
 
 ## Remaining before submission
 
-- Land ENG-9556 and ENG-9750.
-- With Harrison's OK, run ENG-9751. Sign in from Cursor desktop, Cursor web and Grok Bot with a premium account, run `list_logos`, and record the results here.
-- Check in Cursor's **Customize** that the plugin shows as LOGO.com with its logo and the `create-logo` skill.
-- Get design to approve `assets/logo.svg`, or to export the circular icon as an official SVG to replace it.
-- Get Harrison's OK, then submit under ENG-9753.
+- Finish ENG-9751 with the intended premium account. Complete OAuth and run `list_logos` from Cursor desktop, Cursor web and Grok Bot, including a fresh sign-in that returns to consent.
+- Resolve or accept the local `Logo Com` display-name discrepancy. Harrison requested continuation after this finding; it is not blocking the remaining checks.
+- Design note: `assets/logo.svg` still needs design approval. Its rendering has no obvious visual defect, so this note does not block verification.
+- Confirm the publisher handle and contact details at submission time.
+- Obtain Harrison's separate authorization before submitting under ENG-9753. No submission or Linear comments are part of the current task.
 
 ## Review outcome
 
