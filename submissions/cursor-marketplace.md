@@ -1,10 +1,10 @@
 # LOGO.com Cursor Marketplace materials
 
-Status: **NOT SUBMITTED.** Updated on 2026-10-14. ENG-9556 and ENG-9750 are done. ENG-9751 production OAuth verification is incomplete. Harrison has authorized finishing submission under ENG-9753 after verification. Grok Bot reported a timeout while adding the MCP connection. Desktop verification remains blocked on native UI input.
+Status: **NOT SUBMITTED.** Updated on 2026-10-14. ENG-9556 and ENG-9750 are done. ENG-9751 production OAuth verification is incomplete. Harrison has authorized finishing submission under ENG-9753 after verification. After two bot setup failures, a personal Custom MCP entry intended for Grok verification was created through Cursor's web dashboard. Grok availability and OAuth remain unverified. Desktop verification remains blocked on native UI input.
 
 Cursor lists plugins from public Git repositories, and its team reviews each plugin and each update by hand. You submit the repository link at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish). [Plugins](https://cursor.com/docs/plugins), [Reference](https://cursor.com/docs/reference/plugins)
 
-Grok Bot installs plugins from the Cursor Marketplace and follows the team's Cursor connector policy, so this one listing covers Grok Bot too. Cursor staff also describes adding a custom MCP URL through a bot conversation. That provides a possible OAuth test before publication; it does not verify marketplace installation. The LOGO.com custom-MCP attempt on October 14 timed out before OAuth, according to the bot's response. [Grok Bot for teams](https://cursor.com/docs/grok-bot/teams), [Connect plugins](https://cursor.com/help/grok-bot/connect-plugins), [Cursor staff guidance](https://forum.cursor.com/t/grokbot-custom-connectors/169965/5)
+Grok Bot installs plugins from the Cursor Marketplace and follows the team's Cursor connector policy, so this one listing covers Grok Bot too. Cursor staff also describes adding a custom MCP URL through a bot conversation. That provides a possible OAuth test before publication; it does not verify marketplace installation. Two LOGO.com setup attempts on October 14 failed before OAuth, according to the bot's responses. A later Cursor web dashboard setup saved the intended test connection; its availability in Grok remains unverified. [Grok Bot for teams](https://cursor.com/docs/grok-bot/teams), [Connect plugins](https://cursor.com/help/grok-bot/connect-plugins), [Cursor staff guidance](https://forum.cursor.com/t/grokbot-custom-connectors/169965/5)
 
 ## Submission
 
@@ -111,11 +111,13 @@ Cursor registers a client as soon as it loads the plugin, before anyone clicks t
 
 On 2026-10-13, Cursor web added a personal `logo-com` HTTP MCP connection to `https://mcp.logo.com/mcp`. Its Login action reached LOGO.com's production consent screen with `https://www.cursor.com/agents/mcp/oauth/callback`, S256 PKCE, and the `logos account:read offline_access` scopes. On 2026-10-14, Harrison confirmed signing into the reviewer account. Cursor web showed the connection Online, and a dedicated verification agent successfully called `list_logos` through `logo-com`, returning zero logos. The reviewer identity and active Brand trial were subsequently confirmed in the account UI. Current production source treats that trial as premium for `list_logos`; a paid subscription was not verified. The sign-in-to-consent transition was not independently observed.
 
+Later on October 14, Chrome at `cursor.com/dashboard/plugins` → **Personal** → **Add** → **Custom MCP** saved `logo-com-grok-review` with URL `https://mcp.logo.com/mcp`, no headers, and no client credential overrides. After reloading, selecting Personal, and searching for `logo`, both `logo-com` and `logo-com-grok-review` showed **Configured**. This verifies saved configuration only, not OAuth or availability in Grok Bot. Native Grok selection then failed with ScreenCaptureKit `-3811` before the dedicated test bot could be selected. A request for Harrison to authenticate the existing connection and run `list_logos` is pending.
+
 | Client | OAuth result | `list_logos` result |
 | - | - | - |
 | Cursor desktop | Production MCP configuration installed in the local plugin. A fresh local IDE window opened the task worktree and Cursor Settings after an automation reset. Screen-capture errors recurred before MCP sign-in. | Not run |
 | Cursor web | Authenticated connection Online after Harrison's reviewer sign-in. Tokens were not inspected. | Pass: `list_logos` through `logo-com` returned zero logos on 2026-10-14. |
-| Grok Bot | The first connection setup timed out after about 14 minutes. On the authorized retry, the bot reported that setup was cut off after about four minutes and the new connection was still absent. Neither attempt reached OAuth. Verification stopped after the second failure. | Not run |
+| Grok Bot | The first bot setup timed out after about 14 minutes. On the authorized retry, the bot reported that setup was cut off after about four minutes and the new connection was still absent. Neither attempt reached OAuth. The subsequent web dashboard setup saved `logo-com-grok-review` as Configured. Grok availability and OAuth remain unverified because native selection is blocked. | Not run |
 
 Cursor web supports personal HTTP MCP connections from its MCP menu. This lets the server authentication be tested before the marketplace package is published. [Cloud Agent capabilities](https://cursor.com/docs/cloud-agent/capabilities#MCP-tools)
 
