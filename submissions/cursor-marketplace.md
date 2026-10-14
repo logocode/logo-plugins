@@ -1,10 +1,10 @@
 # LOGO.com Cursor Marketplace materials
 
-Status: **NOT SUBMITTED.** Updated on 2026-10-13. ENG-9556 and ENG-9750 are done. ENG-9751 production OAuth verification is in progress. Do not submit under ENG-9753 until the remaining verification is complete and Harrison authorizes submission.
+Status: **NOT SUBMITTED.** Updated on 2026-10-14. ENG-9556 and ENG-9750 are done. ENG-9751 production OAuth verification is incomplete. Harrison has authorized finishing submission under ENG-9753 after verification. Grok Bot reported a timeout while adding the MCP connection. Desktop verification remains blocked on native UI input.
 
 Cursor lists plugins from public Git repositories, and its team reviews each plugin and each update by hand. You submit the repository link at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish). [Plugins](https://cursor.com/docs/plugins), [Reference](https://cursor.com/docs/reference/plugins)
 
-Grok Bot installs plugins from the Cursor Marketplace and follows the team's Cursor connector policy, so this one listing covers Grok Bot too. Cursor staff also describes adding a custom MCP URL through a bot conversation. That provides a possible OAuth test before publication; it does not verify marketplace installation. This custom-MCP path has not yet been tested for LOGO.com. [Grok Bot for teams](https://cursor.com/docs/grok-bot/teams), [Connect plugins](https://cursor.com/help/grok-bot/connect-plugins), [Cursor staff guidance](https://forum.cursor.com/t/grokbot-custom-connectors/169965/5)
+Grok Bot installs plugins from the Cursor Marketplace and follows the team's Cursor connector policy, so this one listing covers Grok Bot too. Cursor staff also describes adding a custom MCP URL through a bot conversation. That provides a possible OAuth test before publication; it does not verify marketplace installation. The LOGO.com custom-MCP attempt on October 14 timed out before OAuth, according to the bot's response. [Grok Bot for teams](https://cursor.com/docs/grok-bot/teams), [Connect plugins](https://cursor.com/help/grok-bot/connect-plugins), [Cursor staff guidance](https://forum.cursor.com/t/grokbot-custom-connectors/169965/5)
 
 ## Submission
 
@@ -107,15 +107,15 @@ Cursor registers a client as soon as it loads the plugin, before anyone clicks t
 
 - ENG-9556: done. The deployed allowlist accepts the documented Cursor web callback and desktop loopback callback. If it rejects any URI in a registration request, the whole registration fails.
 - ENG-9750: done. Production deployment evidence exists for the change that resumes OAuth consent after sign-in. A fresh Google/email-code round trip remains part of ENG-9751 verification.
-- ENG-9751: authorized by Harrison and in progress. Creating the test connections and completing OAuth are authorized. Marketplace submission is not authorized.
+- ENG-9751: authorized by Harrison and in progress. Creating the test connections, completing OAuth, and finishing the marketplace submission after verification are authorized.
 
-On 2026-10-13, Cursor web added a personal `logo-com` HTTP MCP connection to `https://mcp.logo.com/mcp`. Its Login action reached LOGO.com's production consent screen with `https://www.cursor.com/agents/mcp/oauth/callback`, S256 PKCE, and the `logos account:read offline_access` scopes. Consent is pending confirmation of the intended premium test account. No authorization code exchange or `list_logos` result has been verified yet.
+On 2026-10-13, Cursor web added a personal `logo-com` HTTP MCP connection to `https://mcp.logo.com/mcp`. Its Login action reached LOGO.com's production consent screen with `https://www.cursor.com/agents/mcp/oauth/callback`, S256 PKCE, and the `logos account:read offline_access` scopes. On 2026-10-14, Harrison confirmed signing into the reviewer account. Cursor web showed the connection Online, and a dedicated verification agent successfully called `list_logos` through `logo-com`, returning zero logos. This verifies authenticated tool access. The account's premium entitlement and the sign-in-to-consent transition were not independently observed.
 
 | Client | OAuth result | `list_logos` result |
 | - | - | - |
-| Cursor desktop 3.24.12 | Production MCP configuration installed in the local plugin; sign-in not completed. Desktop UI automation encountered capture/window errors. | Not run |
-| Cursor web | Registration and authorization request reached production consent; premium-account confirmation pending. | Not run |
-| Grok Bot | Not run | Not run |
+| Cursor desktop 3.24.12 | Production MCP configuration installed in the local plugin; sign-in not completed. Native UI automation encountered capture/window errors and an unresponsive workspace control. | Not run |
+| Cursor web | Authenticated connection Online after Harrison's reviewer sign-in. Tokens were not inspected. | Pass: `list_logos` through `logo-com` returned zero logos on 2026-10-14. |
+| Grok Bot | Dedicated test bot received the prompt. It reported that adding the MCP connection timed out after about 14 minutes and that the connection was absent. OAuth did not start. Verification stopped on this failure. | Not run |
 
 Cursor web supports personal HTTP MCP connections from its MCP menu. This lets the server authentication be tested before the marketplace package is published. [Cloud Agent capabilities](https://cursor.com/docs/cloud-agent/capabilities#MCP-tools)
 
@@ -141,11 +141,11 @@ No official JSON schema exists for `.cursor-plugin/plugin.json` or `marketplace.
 
 ## Remaining before submission
 
-- Finish ENG-9751 with the intended premium account. Complete OAuth and run `list_logos` from Cursor desktop, Cursor web and Grok Bot, including a fresh sign-in that returns to consent.
+- Finish ENG-9751 with the intended premium account. Complete OAuth and run `list_logos` from Cursor desktop and Grok Bot, and observe a fresh sign-in that returns to consent. Cursor web's authenticated `list_logos` call passed; premium entitlement was not independently checked.
 - Resolve or accept the local `Logo Com` display-name discrepancy. Harrison requested continuation after this finding; it is not blocking the remaining checks.
 - Design note: `assets/logo.svg` still needs design approval. Its rendering has no obvious visual defect, so this note does not block verification.
 - Confirm the publisher handle and contact details at submission time.
-- Obtain Harrison's separate authorization before submitting under ENG-9753. No submission or Linear comments are part of the current task.
+- Submission is authorized after verification. The final portal action also accepts the Publisher Terms and has not been taken. No Linear comments, PR creation, or merges are authorized.
 
 ## Review outcome
 
