@@ -1,10 +1,10 @@
 # LOGO.com Cursor Marketplace materials
 
-Status: **NOT SUBMITTED.** Updated on 2026-10-19. ENG-9556 and ENG-9750 are done. Cursor web's authenticated `list_logos` passed. Cursor desktop Cloud Login and tool use passed per Harrison's October 19 confirmation. ENG-9751 remains incomplete because Grok OAuth and tool use are unverified. Harrison has authorized finishing submission under ENG-9753 after verification. After two bot setup failures, a personal Custom MCP entry intended for Grok verification was created through Cursor's web dashboard.
+Status: **NOT SUBMITTED.** Updated on 2026-10-19. ENG-9556 and ENG-9750 are done. Authenticated tool-use tests passed in Cursor web, Cursor desktop, and Grok Bot. Desktop and Grok results are user-reported. Grok reused existing authentication; fresh Grok OAuth, consent, and callback evidence were not captured. Harrison has authorized finishing submission under ENG-9753. The publisher application and final Publisher Terms acceptance remain.
 
 Cursor lists plugins from public Git repositories, and its team reviews each plugin and each update by hand. You submit the repository link at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish). [Plugins](https://cursor.com/docs/plugins), [Reference](https://cursor.com/docs/reference/plugins)
 
-Grok Bot installs plugins from the Cursor Marketplace and follows the team's Cursor connector policy, so this one listing covers Grok Bot too. Cursor staff also describes adding a custom MCP URL through a bot conversation. That provides a possible OAuth test before publication; it does not verify marketplace installation. Two LOGO.com setup attempts on October 14 failed before OAuth, according to the bot's responses. A later Cursor web dashboard setup saved the intended test connection; its availability in Grok remains unverified. [Grok Bot for teams](https://cursor.com/docs/grok-bot/teams), [Connect plugins](https://cursor.com/help/grok-bot/connect-plugins), [Cursor staff guidance](https://forum.cursor.com/t/grokbot-custom-connectors/169965/5)
+Grok Bot installs plugins from the Cursor Marketplace and follows the team's Cursor connector policy, so this one listing covers Grok Bot too. Cursor staff also describes adding a custom MCP URL through a bot conversation. That provides a possible OAuth test before publication; it does not verify marketplace installation. Two LOGO.com setup attempts on October 14 failed before OAuth, according to the bot's responses. A later Cursor web dashboard setup saved the intended test connection. On October 19, Harrison reported that Grok used that already-authenticated connection and successfully called `list_logos`. [Grok Bot for teams](https://cursor.com/docs/grok-bot/teams), [Connect plugins](https://cursor.com/help/grok-bot/connect-plugins), [Cursor staff guidance](https://forum.cursor.com/t/grokbot-custom-connectors/169965/5)
 
 ## Submission
 
@@ -107,19 +107,21 @@ Cursor registers a client as soon as it loads the plugin, before anyone clicks t
 
 - ENG-9556: done. The deployed allowlist accepts the documented Cursor web callback and desktop loopback callback. The desktop Cloud Login callback was not captured, so `http://localhost:8787/callback` has deployed-code coverage but no observed production round trip. If the allowlist rejects any URI in a registration request, the whole registration fails.
 - ENG-9750: done. Production deployment evidence passed for the change that resumes OAuth consent after sign-in. A fresh Google/email-code sign-in returning to consent remains unconfirmed at runtime.
-- ENG-9751: authorized by Harrison and in progress. Creating the test connections, completing OAuth, and finishing the marketplace submission after verification are authorized.
+- ENG-9751 verification: authenticated tool-use checks passed in all three clients. Cursor desktop and Grok results are user-reported, with the evidence limits below. Fresh Grok OAuth was not observed because the connection was already signed in.
 
 On 2026-10-13, Cursor web added a personal `logo-com` HTTP MCP connection to `https://mcp.logo.com/mcp`. Its Login action reached LOGO.com's production consent screen with `https://www.cursor.com/agents/mcp/oauth/callback`, S256 PKCE, and the `logos account:read offline_access` scopes. On 2026-10-14, Harrison confirmed signing into the reviewer account. Cursor web showed the connection Online, and a dedicated verification agent successfully called `list_logos` through `logo-com`, returning zero logos. The reviewer identity and active Brand trial were subsequently confirmed in the account UI. Current production source treats that trial as premium for `list_logos`; a paid subscription was not verified. The sign-in-to-consent transition was not independently observed.
 
-Later on October 14, Chrome at `cursor.com/dashboard/plugins` → **Personal** → **Add** → **Custom MCP** saved `logo-com-grok-review` with URL `https://mcp.logo.com/mcp`, no headers, and no client credential overrides. After reloading, selecting Personal, and searching for `logo`, both `logo-com` and `logo-com-grok-review` showed **Configured**. This verifies saved configuration only, not OAuth or availability in Grok Bot. Native Grok selection then failed with ScreenCaptureKit `-3811` before the dedicated test bot could be selected. A request for Harrison to authenticate the existing connection and run `list_logos` is pending.
+Later on October 14, Chrome at `cursor.com/dashboard/plugins` → **Personal** → **Add** → **Custom MCP** saved `logo-com-grok-review` with URL `https://mcp.logo.com/mcp`, no headers, and no client credential overrides. After reloading, selecting Personal, and searching for `logo`, both `logo-com` and `logo-com-grok-review` showed **Configured**. That observation verified saved configuration only. Native Grok selection then failed with ScreenCaptureKit `-3811` before the dedicated test bot could be selected. The first bot setup had timed out after about 14 minutes, and the authorized retry had been cut off after about four minutes. Neither setup attempt reached OAuth. These historical setup and UI failures preceded Harrison's successful tool test.
 
 On October 19, Harrison was asked whether Cloud Login inside Cursor desktop included successful `list_logos` or tool use rather than sign-in alone. He confirmed: "yes, tools worked". Desktop Cloud Login and authenticated tool use are recorded as **Pass (user-reported)**. No independent desktop tool transcript, screenshot, exact output, result count, or callback was captured. The currently installed Cursor version is 3.25.6. The installed local manifest, both MCP configuration files, `create-logo` skill, and SVG were checked on October 19 and matched this branch.
+
+On October 19, Harrison reported that Grok's existing `logo-com-grok-review` connection was already signed in. `list_logos` returned four logos with nothing further to load. Grok authenticated tool use is recorded as **Pass (user-reported)**. Logo names and other returned account content are omitted. Fresh Grok OAuth, consent, and callback details were not captured, and no independent Grok tool transcript or screenshot was captured.
 
 | Client | OAuth result | `list_logos` result |
 | - | - | - |
 | Cursor desktop (3.25.6 currently installed) | **Pass (user-reported):** Harrison confirmed Cloud Login and working tools on October 19. Earlier automation capture failures are historical. The desktop callback was not captured. | **Pass (user-reported):** "tools worked" in response to the `list_logos`/tool-use check. No independent tool transcript, exact output, screenshot, or count was captured. |
 | Cursor web | Authenticated connection Online after Harrison's reviewer sign-in. Tokens were not inspected. | Pass: `list_logos` through `logo-com` returned zero logos on 2026-10-14. |
-| Grok Bot | The first bot setup timed out after about 14 minutes. On the authorized retry, the bot reported that setup was cut off after about four minutes and the new connection was still absent. Neither attempt reached OAuth. The subsequent web dashboard setup saved `logo-com-grok-review` as Configured. Grok availability and OAuth remain unverified because native selection is blocked. | Not run |
+| Grok Bot | **Authenticated (user-reported):** existing `logo-com-grok-review` was already signed in on October 19. Fresh OAuth, consent, and callback were not captured. | **Pass (user-reported):** `list_logos` returned four logos with nothing further to load. No independent tool transcript or screenshot was captured. |
 
 Cursor web supports personal HTTP MCP connections from its MCP menu. This lets the server authentication be tested before the marketplace package is published. [Cloud Agent capabilities](https://cursor.com/docs/cloud-agent/capabilities#MCP-tools)
 
@@ -139,18 +141,19 @@ Package validation rerun on 2026-10-13. Both `claude plugin validate --strict ./
 | Every `${VAR}` in `mcp.json` is declared in the manifest | Not applicable. `mcp.json` has no variables. |
 | Manifest paths are relative, with no `..` or absolute paths | Pass |
 | Tested locally | Desktop Cloud Login and tool use passed per Harrison's October 19 confirmation; no independent tool transcript was captured. Cursor 3.25.6 is installed, and the local manifest, both MCP configurations, skill, and SVG matched this branch on October 19. The October 13 Customize screenshot from Cursor 3.24.12 shows the logo and `create-logo` skill, with the historical `Logo Com` heading discrepancy. The heading has not been rechecked in 3.25.6. |
+| Authenticated tool use in Cursor desktop, Cursor web, and Grok Bot | Pass. Web `list_logos` was observed directly. Desktop tool use and Grok `list_logos` success were reported by Harrison on October 19. This does not establish a fresh Grok OAuth round trip or marketplace installation. |
 | Repo has `.cursor-plugin/marketplace.json` at its root with unique plugin names | Pass |
 
 No official JSON schema exists for `.cursor-plugin/plugin.json` or `marketplace.json`. The [Agent Plugins schemas](https://agent-plugins.org/schemas) cover the root `plugin.json` format, which this package doesn't use.
 
 ## Remaining before submission
 
-- Finish ENG-9751 with the intended premium account. Complete OAuth and run `list_logos` from Grok Bot. Cursor desktop Cloud Login and tool use passed per Harrison's confirmation. Cursor web's authenticated `list_logos` call passed with a reviewer account whose active Brand trial was verified on October 14 as qualifying for premium MCP access.
-- A fresh sign-in returning to consent remains unconfirmed at runtime; ENG-9750's production deployment evidence passed. The desktop loopback callback remains covered by deployed allowlist code without an observed production round trip.
-- Resolve or accept the local `Logo Com` display-name discrepancy. Harrison requested continuation after this finding; it is not blocking the remaining checks.
-- Design note: `assets/logo.svg` still needs design approval. Its rendering has no obvious visual defect, so this note does not block verification.
-- Confirm the publisher handle and contact details at submission time.
-- Submission is authorized after verification. The final portal action also accepts the Publisher Terms and has not been taken. No Linear comments, PR creation, or merges are authorized.
+- Complete the publisher application, confirming the publisher handle and contact details.
+- Complete final Publisher Terms acceptance and submission. Harrison has authorized finishing submission, but the final portal action has not been taken. No Linear comments, PR creation, or merges are authorized.
+
+Evidence limits remain recorded: fresh sign-in returning to consent was not observed at runtime, although ENG-9750's production deployment evidence passed. The desktop loopback callback has deployed allowlist coverage without an observed production round trip. Grok reused existing authentication. None of these direct tool tests verifies marketplace installation.
+
+Nonblocking notes: the historical `Logo Com` display-name discrepancy remains recorded, and `assets/logo.svg` still needs design approval. Harrison requested continuation after the naming finding. The icon has no obvious visual defect.
 
 ## Review outcome
 
