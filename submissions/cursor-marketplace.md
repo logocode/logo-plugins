@@ -1,6 +1,6 @@
 # LOGO.com Cursor Marketplace materials
 
-Status: **NOT SUBMITTED.** Updated on 2026-10-14. ENG-9556 and ENG-9750 are done. ENG-9751 production OAuth verification is incomplete. Harrison has authorized finishing submission under ENG-9753 after verification. After two bot setup failures, a personal Custom MCP entry intended for Grok verification was created through Cursor's web dashboard. Grok availability and OAuth remain unverified. Desktop verification remains blocked on native UI input.
+Status: **NOT SUBMITTED.** Updated on 2026-10-19. ENG-9556 and ENG-9750 are done. Cursor web's authenticated `list_logos` passed. Cursor desktop Cloud Login and tool use passed per Harrison's October 19 confirmation. ENG-9751 remains incomplete because Grok OAuth and tool use are unverified. Harrison has authorized finishing submission under ENG-9753 after verification. After two bot setup failures, a personal Custom MCP entry intended for Grok verification was created through Cursor's web dashboard.
 
 Cursor lists plugins from public Git repositories, and its team reviews each plugin and each update by hand. You submit the repository link at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish). [Plugins](https://cursor.com/docs/plugins), [Reference](https://cursor.com/docs/reference/plugins)
 
@@ -39,7 +39,7 @@ Cursor merges `plugins/logo-com/.cursor-plugin/plugin.json` over the marketplace
 | Field | Value |
 | - | - |
 | `name` | `logo-com` |
-| `displayName` | `LOGO.com` in the manifest. Cursor 3.24.12 Customize displays the local package as `Logo Com`; this remains a recorded discrepancy while verification continues. |
+| `displayName` | `LOGO.com` in the manifest. Cursor 3.24.12 Customize displayed the local package as `Logo Com` on October 13. This remains a recorded discrepancy; the heading has not been rechecked in the currently installed Cursor 3.25.6. |
 | `description` | Create a logo, get brand basics (colors, fonts), or make a logo for a website. Browse your LOGO.com logos and generate new designs from a chat. Use for: create a logo, design a logo, make a logo, logo maker, brand mark, logo for my business, logo for my website. Requires a LOGO.com premium plan. |
 | `version` | 0.1.1, the same as the Claude and Codex manifests |
 | `author` | LOGO.com |
@@ -105,17 +105,19 @@ Cursor registers a client as soon as it loads the plugin, before anyone clicks t
 
 ### Dependencies and production verification
 
-- ENG-9556: done. The deployed allowlist accepts the documented Cursor web callback and desktop loopback callback. If it rejects any URI in a registration request, the whole registration fails.
-- ENG-9750: done. Production deployment evidence exists for the change that resumes OAuth consent after sign-in. A fresh Google/email-code round trip remains part of ENG-9751 verification.
+- ENG-9556: done. The deployed allowlist accepts the documented Cursor web callback and desktop loopback callback. The desktop Cloud Login callback was not captured, so `http://localhost:8787/callback` has deployed-code coverage but no observed production round trip. If the allowlist rejects any URI in a registration request, the whole registration fails.
+- ENG-9750: done. Production deployment evidence passed for the change that resumes OAuth consent after sign-in. A fresh Google/email-code sign-in returning to consent remains unconfirmed at runtime.
 - ENG-9751: authorized by Harrison and in progress. Creating the test connections, completing OAuth, and finishing the marketplace submission after verification are authorized.
 
 On 2026-10-13, Cursor web added a personal `logo-com` HTTP MCP connection to `https://mcp.logo.com/mcp`. Its Login action reached LOGO.com's production consent screen with `https://www.cursor.com/agents/mcp/oauth/callback`, S256 PKCE, and the `logos account:read offline_access` scopes. On 2026-10-14, Harrison confirmed signing into the reviewer account. Cursor web showed the connection Online, and a dedicated verification agent successfully called `list_logos` through `logo-com`, returning zero logos. The reviewer identity and active Brand trial were subsequently confirmed in the account UI. Current production source treats that trial as premium for `list_logos`; a paid subscription was not verified. The sign-in-to-consent transition was not independently observed.
 
 Later on October 14, Chrome at `cursor.com/dashboard/plugins` → **Personal** → **Add** → **Custom MCP** saved `logo-com-grok-review` with URL `https://mcp.logo.com/mcp`, no headers, and no client credential overrides. After reloading, selecting Personal, and searching for `logo`, both `logo-com` and `logo-com-grok-review` showed **Configured**. This verifies saved configuration only, not OAuth or availability in Grok Bot. Native Grok selection then failed with ScreenCaptureKit `-3811` before the dedicated test bot could be selected. A request for Harrison to authenticate the existing connection and run `list_logos` is pending.
 
+On October 19, Harrison was asked whether Cloud Login inside Cursor desktop included successful `list_logos` or tool use rather than sign-in alone. He confirmed: "yes, tools worked". Desktop Cloud Login and authenticated tool use are recorded as **Pass (user-reported)**. No independent desktop tool transcript, screenshot, exact output, result count, or callback was captured. The currently installed Cursor version is 3.25.6. The installed local manifest, both MCP configuration files, `create-logo` skill, and SVG were checked on October 19 and matched this branch.
+
 | Client | OAuth result | `list_logos` result |
 | - | - | - |
-| Cursor desktop | Production MCP configuration installed in the local plugin. A fresh local IDE window opened the task worktree and Cursor Settings after an automation reset. Screen-capture errors recurred before MCP sign-in. | Not run |
+| Cursor desktop (3.25.6 currently installed) | **Pass (user-reported):** Harrison confirmed Cloud Login and working tools on October 19. Earlier automation capture failures are historical. The desktop callback was not captured. | **Pass (user-reported):** "tools worked" in response to the `list_logos`/tool-use check. No independent tool transcript, exact output, screenshot, or count was captured. |
 | Cursor web | Authenticated connection Online after Harrison's reviewer sign-in. Tokens were not inspected. | Pass: `list_logos` through `logo-com` returned zero logos on 2026-10-14. |
 | Grok Bot | The first bot setup timed out after about 14 minutes. On the authorized retry, the bot reported that setup was cut off after about four minutes and the new connection was still absent. Neither attempt reached OAuth. The subsequent web dashboard setup saved `logo-com-grok-review` as Configured. Grok availability and OAuth remain unverified because native selection is blocked. | Not run |
 
@@ -136,14 +138,15 @@ Package validation rerun on 2026-10-13. Both `claude plugin validate --strict ./
 | Agent Plugins conform to the Agent Plugins schemas | Not applicable. This is a Cursor Plugin, not an Agent Plugin with a root `plugin.json`. |
 | Every `${VAR}` in `mcp.json` is declared in the manifest | Not applicable. `mcp.json` has no variables. |
 | Manifest paths are relative, with no `..` or absolute paths | Pass |
-| Tested locally | Partly. Cursor 3.24.12 Customize shows the blue and white logo and `create-logo` skill. The heading is `Logo Com` despite `displayName: LOGO.com`. The installed manifest, skill, and SVG match this branch. Both production MCP configuration files are now installed locally, but desktop OAuth and `list_logos` remain unverified. |
+| Tested locally | Desktop Cloud Login and tool use passed per Harrison's October 19 confirmation; no independent tool transcript was captured. Cursor 3.25.6 is installed, and the local manifest, both MCP configurations, skill, and SVG matched this branch on October 19. The October 13 Customize screenshot from Cursor 3.24.12 shows the logo and `create-logo` skill, with the historical `Logo Com` heading discrepancy. The heading has not been rechecked in 3.25.6. |
 | Repo has `.cursor-plugin/marketplace.json` at its root with unique plugin names | Pass |
 
 No official JSON schema exists for `.cursor-plugin/plugin.json` or `marketplace.json`. The [Agent Plugins schemas](https://agent-plugins.org/schemas) cover the root `plugin.json` format, which this package doesn't use.
 
 ## Remaining before submission
 
-- Finish ENG-9751 with the intended premium account. Complete OAuth and run `list_logos` from Cursor desktop and Grok Bot, and observe a fresh sign-in that returns to consent. Cursor web's authenticated `list_logos` call passed with a reviewer account on an active Brand trial, which qualifies for premium MCP access.
+- Finish ENG-9751 with the intended premium account. Complete OAuth and run `list_logos` from Grok Bot. Cursor desktop Cloud Login and tool use passed per Harrison's confirmation. Cursor web's authenticated `list_logos` call passed with a reviewer account whose active Brand trial was verified on October 14 as qualifying for premium MCP access.
+- A fresh sign-in returning to consent remains unconfirmed at runtime; ENG-9750's production deployment evidence passed. The desktop loopback callback remains covered by deployed allowlist code without an observed production round trip.
 - Resolve or accept the local `Logo Com` display-name discrepancy. Harrison requested continuation after this finding; it is not blocking the remaining checks.
 - Design note: `assets/logo.svg` still needs design approval. Its rendering has no obvious visual defect, so this note does not block verification.
 - Confirm the publisher handle and contact details at submission time.
