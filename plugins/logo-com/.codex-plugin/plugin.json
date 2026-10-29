@@ -1,7 +1,7 @@
 {
   "name": "logo-com",
-  "version": "0.1.1",
-  "description": "Create a logo, get brand basics (colors, fonts), or make a logo for a website. Browse your LOGO.com logos and generate up to four new designs from a business name and ideas. Use when someone wants to create a logo, design a logo, make a logo, use a logo maker, get a brand mark with colors and fonts, or get a logo for their website. Requires a LOGO.com premium plan; generation uses AI credits.",
+  "version": "0.1.3",
+  "description": "Create and browse logos, inspect colors, fonts and downloads, and read your LOGO.com account, domain health and website status. Generate one to four draft logo designs using existing AI credits. Account summaries work on free plans. Logo tools require premium access; domain and website details require a paid premium plan for the selected organization. Website publishing, DNS changes, subscription changes and credit purchases are not supported.",
   "author": {
     "name": "LOGO.com",
     "url": "https://logo.com"
@@ -22,8 +22,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "LOGO.com",
-    "shortDescription": "Create a logo, logo maker, brand mark, logo for website",
-    "longDescription": "Create a logo and brand basics (colors, fonts), then continue on logo.com for brand kit or a website — from chat.\n\nConnect your LOGO.com account to generate up to four new logo designs from a business name and ideas, list recent logos with previews and editor links, or open one to see its colors, fonts and download files. New designs are drafts until you open one in the LOGO.com editor and save it. After saving, brand kit and website tools are available on logo.com; this plugin covers logo creation and browsing account logos.\n\nNatural intents: create a logo, design a logo, make a logo, logo maker, brand mark, logo colors and fonts, logo for my business, logo for my website.\n\nRequirements: a LOGO.com premium plan. Creating designs uses your account's AI credits.",
+    "shortDescription": "Logos, domains & account",
+    "longDescription": "Create logos and check your LOGO.com account from chat.\n\nGenerate one to four new logo designs from a business name and ideas. Browse up to 50 recently created saved logos owned by you in the selected organization, then inspect their colors, fonts, previews and available download files. New designs are drafts until you open them in the LOGO.com editor and save them.\n\nRead your selected organization's account summary, plan, AI credit balances, domains, business email setup and websites. Inspect owned domain settings and live DNS health, or list websites and check publication and custom-domain status. These tools do not change DNS, read email messages, edit or publish websites, export a full brand kit, change subscriptions or purchase credits.\n\nAccount summaries work on free plans. Logo tools require premium access, and generation also requires creation permission and existing AI credits. Domain details, domain health and website details require a paid premium plan for the selected organization. Account plan flags alone do not guarantee access to those tools.",
     "developerName": "LOGO.com",
     "category": "Creativity",
     "capabilities": [],
@@ -33,8 +33,8 @@
     "termsOfServiceURL": "https://logo.com/terms-and-conditions",
     "defaultPrompt": [
       "Create a logo for my coffee shop, Bean There",
-      "Design a brand logo for my startup and show colors and fonts",
-      "I need a logo for my new website — design a few options"
+      "Show my account, AI credits, and website status",
+      "Check my domain's DNS health and explain any problems"
     ],
     "brandColor": "#1890FF",
     "composerIcon": "./assets/logo.png",
@@ -46,22 +46,22 @@
         "test_cases": {
           "positive": [
             {
-              "description": "List saved logos. Setup: the connected premium account has at least one saved sample logo in its selected organization. Only logos owned by that user in that organization are eligible. Run in a fresh conversation.",
-              "prompt": "Show me my most recent saved logos, with previews and links to open them.",
-              "tools_triggered": "list_logos",
-              "expected_behavior": "Call list_logos with no arguments. Show the returned business names, previews, and editor links for at most 50 logos in the returned order. Do not create designs or claim access to another user's logos. If has_more is true, explain that this is a limited recent list rather than inventing a next page."
+              "description": "Read the selected organization account summary. Setup: a connected sample account with known plan, credit balances and product counts. This case also works on a free plan. Run in a fresh conversation.",
+              "prompt": "Show my LOGO.com account summary, including my plan, AI credit balances, domains, business email setup, websites and saved-logo count.",
+              "tools_triggered": "get_account",
+              "expected_behavior": "Call get_account with no arguments. Summarize only returned account fields, balances, product lists and counts. Respect has_more and list limits; do not claim the returned lists are exhaustive when truncated. Describe business email setup without claiming access to messages. Do not treat is_premium alone as proof of eligibility for domain or website detail tools. Do not purchase credits or change the account."
             },
             {
-              "description": "Inspect a saved logo's brand details. Setup: the newest saved sample logo has known colors and fonts that can be compared with the LOGO.com editor. Run in a fresh conversation with the premium account connected.",
-              "prompt": "What colors and fonts does my most recent saved logo use? Include a link to open that logo.",
+              "description": "Browse and inspect a saved logo. Setup: the connected premium user owns at least one saved sample logo in the selected organization with known colors and fonts and working high-resolution PNG, transparent PNG, SVG and PDF downloads. Run in a fresh conversation.",
+              "prompt": "Show my recent saved logos with previews and editor links. For the first logo returned, show its colors and fonts and download links for high-resolution PNG, transparent PNG, SVG and PDF.",
               "tools_triggered": "list_logos, get_logo",
-              "expected_behavior": "Call list_logos, then get_logo with the first returned logo_id. Report only colors and font details present in get_logo's response, and use its editor_url. The details must match the selected sample logo. Do not infer missing fonts or generate a replacement logo."
+              "expected_behavior": "Call list_logos with no arguments. Show at most 50 logos in returned order, respecting has_more without inventing pagination. Pass the first returned logo_id to get_logo. Present only returned colors, fonts, preview and editor URLs, and download file names, formats and URLs. During review open the four downloads and verify the selected logo and file formats. Report missing formats as unavailable. Do not guess IDs, access another user's logos or generate replacements."
             },
             {
-              "description": "Retrieve downloads for an existing logo. Setup: the newest saved sample logo supports high-resolution PNG, transparent PNG, SVG, and PDF downloads. Run in a fresh conversation with the premium account connected.",
-              "prompt": "Give me download links for my most recent saved logo as a high-resolution PNG, transparent PNG, SVG, and PDF.",
-              "tools_triggered": "list_logos, get_logo",
-              "expected_behavior": "Resolve the most recent logo through list_logos and pass its logo_id to get_logo. Present the four requested downloads using the returned files' names, formats, and URLs. Open the links during review and verify they return the selected logo in the stated format. Do not invent URLs or substitute another logo; report any missing format as unavailable."
+              "description": "Inspect domain health and website status without changing them. Setup: the selected organization has a paid premium plan, at least one owned sample domain with known DNS configuration, and a sample website with known publication and custom-domain status. Seed these fixtures before review. Run in a fresh conversation.",
+              "prompt": "Check my first listed domain: show its settings and live DNS health, then explain any reported problems. List my websites and inspect the first returned site for publication and custom-domain status. Do not change anything.",
+              "tools_triggered": "get_account, get_domain, check_domain_health, get_site",
+              "expected_behavior": "Call get_account and use a domain it returns for get_domain and check_domain_health. Report returned expiry, auto-renew, DNS, nameservers, forwarding, linked-site and email status only when available. Explain health status and reported problems and fixes without changing DNS. Call get_site without site_id to list sites, then with the first returned site_id to inspect it. Report returned publication, URL and custom-domain status without editing or publishing. Respect list limits and has_more. Do not invent unavailable registrar settings or treat null as disabled. A PREMIUM_REQUIRED error must be reported accurately but does not pass this seeded positive case."
             },
             {
               "description": "Create one draft from a detailed brief. Setup: the connected premium account can create designs, has sufficient AI credits, and has no generation already running. This case consumes AI credits. Run in a fresh conversation and wait for completion before the next generation case.",
@@ -78,7 +78,7 @@
           ],
           "negative": [
             {
-              "description": "Non-logo image request. Expected behavior: no LOGO.com tool is called, because LOGO.com only creates logos. The host may answer with its own capabilities or explain the limit, but must not turn the request into a LOGO.com logo-generation job.",
+              "description": "Non-logo image request. Expected behavior: no LOGO.com tool is called, because standalone photo generation is not supported. The host may answer with its own capabilities or explain the limit, but must not turn the request into a LOGO.com logo-generation job.",
               "prompt": "Create a photorealistic picture of a golden retriever surfing, with no text or branding."
             },
             {
@@ -92,10 +92,10 @@
           ]
         },
         "commerce": false,
-        "commerce_description": "The plugin does not sell products, start subscriptions, purchase credits, or process payments. It lets users access features included in an existing LOGO.com premium account. Logo generation consumes the account's existing AI credits."
+        "commerce_description": "The plugin does not sell products, start subscriptions, purchase credits or process payments. Account summaries work on free plans. Logo tools require premium access; domain and website detail tools require a paid premium plan for the selected organization. Logo generation consumes existing AI credits."
       },
       "publication": {
-        "release_notes": "Initial public release of the LOGO.com plugin for ChatGPT and Codex. Connect an existing premium account to browse saved logos, inspect colors and fonts, retrieve available download links, and generate one to four draft logo designs with previews and editor links. Generation uses existing AI credits. Designs are saved only when the user saves them in the LOGO.com editor."
+        "release_notes": "Align the listing and review cases with all eight MCP tools: get_account, list_logos, get_logo, generate_logos, get_logo_generation, get_domain, check_domain_health and get_site. Clarify free account summaries, premium requirements, read-only domain and website access, and unsaved logo drafts. Generation uses existing AI credits."
       }
     }
   }

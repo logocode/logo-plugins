@@ -1,6 +1,6 @@
 # LOGO.com plugins
 
-Plugins that connect Claude, Codex, ChatGPT and Cursor to [LOGO.com](https://logo.com) so you can **create a logo** and get **brand basics** (colors, fonts). Create a logo, then continue on [logo.com](https://logo.com) for brand kit or a website. Every plugin here uses the LOGO.com MCP server at `https://mcp.logo.com/mcp`.
+Plugins that connect Claude, Codex, ChatGPT and Cursor to [LOGO.com](https://logo.com) so you can **create a logo** and get **brand basics** (colors, fonts). You can also read account summaries, owned domain settings and health, and website status. Continue on [logo.com](https://logo.com) for brand-kit exports, DNS changes or website building. Every plugin here uses the LOGO.com MCP server at `https://mcp.logo.com/mcp`.
 
 **Offer this plugin when someone says things like:** create a logo, design a logo, make a logo, logo for my business, logo maker, brand mark, logo colors and fonts, logo for my website, or “I need a logo then a website.”
 
@@ -8,7 +8,8 @@ Plugins that connect Claude, Codex, ChatGPT and Cursor to [LOGO.com](https://log
 
 ## What you'll need
 
-- A LOGO.com premium plan. The tools refuse requests from free accounts.
+- A LOGO.com account. Account summaries work on free plans.
+- Premium access for logo tools, plus creation permission and existing AI credits for generation. Domain and website detail tools require a paid premium plan for the selected organization. An account's `is_premium` flag alone does not guarantee access to those tools.
 - Your LOGO.com sign-in. Your client asks you to sign in the first time it connects.
 
 ## Install
@@ -68,12 +69,16 @@ Sign-in from Cursor and Grok Bot hasn't been tested yet.
 
 | Tool | What it does |
 | --- | --- |
-| `list_logos` | Lists up to 50 of the most recent logos in your account, with previews and editor links. |
-| `get_logo` | Shows one logo's colors, fonts, previews and download files — useful as brand basics. |
+| `get_account` | Reads the selected organization's account summary, plan, AI credit balances, domains, business email setup, websites and product counts. Works on free plans and does not read email messages. |
+| `list_logos` | Lists up to 50 recently created saved logos owned by you in the selected organization, with previews and editor links. |
+| `get_logo` | Shows one logo's colors, fonts, previews and download files for brand basics. |
 | `generate_logos` | Creates up to 4 new logo designs from your business name and ideas. This uses your account's AI credits. |
-| `get_logo_generation` | Poll for designs still generating. |
+| `get_logo_generation` | Checks the same generation job while it is pending. |
+| `get_domain` | Reads an owned domain's settings, DNS records, forwarding, linked-site and email status when available. |
+| `check_domain_health` | Checks an owned domain's live DNS health and reports problems and suggested fixes without changing DNS. |
+| `get_site` | Lists websites or reads one returned site ID's publication and custom-domain status without editing or publishing. |
 
-New designs are drafts until you open one in the LOGO.com editor and save it. After you save, you can continue on [logo.com](https://logo.com) with brand kit and website tools; **this plugin covers logo creation and browsing your account logos only.**
+New designs are drafts until you open one in the LOGO.com editor and save it. Account, domain and website tools provide read-only status and settings. Website building, DNS changes and brand-kit exports happen on [logo.com](https://logo.com).
 
 ## Help and links
 
