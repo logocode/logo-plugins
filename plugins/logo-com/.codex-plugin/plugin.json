@@ -1,7 +1,7 @@
 {
   "name": "logo-com",
-  "version": "0.1.3",
-  "description": "Create and browse logos, inspect colors, fonts and downloads, and read your LOGO.com account, domain health and website status. Generate one to four draft logo designs using existing AI credits. Account summaries work on free plans. Logo tools require premium access; domain and website details require a paid premium plan for the selected organization. Website publishing, DNS changes, subscription changes and credit purchases are not supported.",
+  "version": "0.1.4",
+  "description": "Create and browse logos, inspect colors, fonts and downloads, and read your LOGO.com account, domain health and website status. Generate one to four draft logo designs using existing AI credits. Account summaries work on free plans. Logo tools require premium access; domain and website details require a premium plan (including an active trial) for the selected organization. Website publishing, DNS changes, subscription changes and credit purchases are not supported.",
   "author": {
     "name": "LOGO.com",
     "url": "https://logo.com"
@@ -23,7 +23,7 @@
   "interface": {
     "displayName": "LOGO.com",
     "shortDescription": "Logos, domains & account",
-    "longDescription": "Create logos and check your LOGO.com account from chat.\n\nGenerate one to four new logo designs from a business name and ideas. Browse up to 50 recently created saved logos owned by you in the selected organization, then inspect their colors, fonts, previews and available download files. New designs are drafts until you open them in the LOGO.com editor and save them.\n\nRead your selected organization's account summary, plan, AI credit balances, domains, business email setup and websites. Inspect owned domain settings and live DNS health, or list websites and check publication and custom-domain status. These tools do not change DNS, read email messages, edit or publish websites, export a full brand kit, change subscriptions or purchase credits.\n\nAccount summaries work on free plans. Logo tools require premium access, and generation also requires creation permission and existing AI credits. Domain details, domain health and website details require a paid premium plan for the selected organization. Account plan flags alone do not guarantee access to those tools.",
+    "longDescription": "Create logos and check your LOGO.com account from chat.\n\nGenerate one to four new logo designs from a business name and ideas. Browse up to 50 recently created saved logos owned by you in the selected organization, then inspect their colors, fonts, previews and available download files. New designs are drafts until you open them in the LOGO.com editor and save them.\n\nRead your selected organization's account summary, plan, AI credit balances, domains, business email setup and websites. Inspect owned domain settings and live DNS health, or list websites and check publication and custom-domain status. These tools do not change DNS, read email messages, edit or publish websites, export a full brand kit, change subscriptions or purchase credits.\n\nAccount summaries work on free plans. Logo tools require premium access, and generation also requires creation permission and existing AI credits. Domain details, domain health and website details require a premium plan (including an active trial) for the selected organization. Account plan flags alone do not guarantee access to those tools.",
     "developerName": "LOGO.com",
     "category": "Creativity",
     "capabilities": [],
@@ -34,7 +34,7 @@
     "defaultPrompt": [
       "Create a logo for my coffee shop, Bean There",
       "Show my account, AI credits, and website status",
-      "Check my domain's DNS health and explain any problems"
+      "Show my Link in Bio site and whether it is published"
     ],
     "brandColor": "#1890FF",
     "composerIcon": "./assets/logo.png",
@@ -47,7 +47,7 @@
           "positive": [
             {
               "description": "Read the selected organization account summary. Setup: a connected sample account with known plan, credit balances and product counts. This case also works on a free plan. Run in a fresh conversation.",
-              "prompt": "Show my LOGO.com account summary, including my plan, AI credit balances, domains, business email setup, websites and saved-logo count.",
+              "prompt": "Show my LOGO.com account summary, including my plan, AI credit balances, websites and saved-logo count.",
               "tools_triggered": "get_account",
               "expected_behavior": "Call get_account with no arguments. Summarize only returned account fields, balances, product lists and counts. Respect has_more and list limits; do not claim the returned lists are exhaustive when truncated. Describe business email setup without claiming access to messages. Do not treat is_premium alone as proof of eligibility for domain or website detail tools. Do not purchase credits or change the account."
             },
@@ -58,10 +58,10 @@
               "expected_behavior": "Call list_logos with no arguments. Show at most 50 logos in returned order, respecting has_more without inventing pagination. Pass the first returned logo_id to get_logo. Present only returned colors, fonts, preview and editor URLs, and download file names, formats and URLs. During review open the four downloads and verify the selected logo and file formats. Report missing formats as unavailable. Do not guess IDs, access another user's logos or generate replacements."
             },
             {
-              "description": "Inspect domain health and website status without changing them. Setup: the selected organization has a paid premium plan, at least one owned sample domain with known DNS configuration, and a sample website with known publication and custom-domain status. Seed these fixtures before review. Run in a fresh conversation.",
-              "prompt": "Check my first listed domain: show its settings and live DNS health, then explain any reported problems. List my websites and inspect the first returned site for publication and custom-domain status. Do not change anything.",
-              "tools_triggered": "get_account, get_domain, check_domain_health, get_site",
-              "expected_behavior": "Call get_account and use a domain it returns for get_domain and check_domain_health. Report returned expiry, auto-renew, DNS, nameservers, forwarding, linked-site and email status only when available. Explain health status and reported problems and fixes without changing DNS. Call get_site without site_id to list sites, then with the first returned site_id to inspect it. Report returned publication, URL and custom-domain status without editing or publishing. Respect list limits and has_more. Do not invent unavailable registrar settings or treat null as disabled. A PREMIUM_REQUIRED error must be reported accurately but does not pass this seeded positive case."
+              "description": "Inspect an existing Link in Bio site without changing it. Setup: the connected reviewer owns a published one-page sample site, and the selected organization has premium access, including an active trial. No owned domain or Gen website fixture is needed. Run in a fresh conversation.",
+              "prompt": "List my Link in Bio sites. For the first one, show its URL, whether it is published, and its custom-domain status. Do not create, edit or publish anything.",
+              "tools_triggered": "get_site",
+              "expected_behavior": "Call get_site without site_id. Select the first returned site whose type is one_page_site, then call get_site with that returned site_id. Report its returned URL, publication status and custom-domain fields. If custom_domain and custom_domain_status are null, say no custom domain is connected; do not invent a hostname or treat null as an error. Respect has_more and list limits. Do not select a website-type Gen site, call domain tools, create a site, edit it or publish it. An access error must be reported accurately but does not pass this seeded positive case."
             },
             {
               "description": "Create one draft from a detailed brief. Setup: the connected premium account can create designs, has sufficient AI credits, and has no generation already running. This case consumes AI credits. Run in a fresh conversation and wait for completion before the next generation case.",
@@ -92,10 +92,10 @@
           ]
         },
         "commerce": false,
-        "commerce_description": "The plugin does not sell products, start subscriptions, purchase credits or process payments. Account summaries work on free plans. Logo tools require premium access; domain and website detail tools require a paid premium plan for the selected organization. Logo generation consumes existing AI credits."
+        "commerce_description": "The plugin does not sell products, start subscriptions, purchase credits or process payments. Account summaries work on free plans. Logo tools require premium access; domain and website detail tools require a premium plan (including an active trial) for the selected organization. Logo generation consumes existing AI credits."
       },
       "publication": {
-        "release_notes": "Align the listing and review cases with all eight MCP tools: get_account, list_logos, get_logo, generate_logos, get_logo_generation, get_domain, check_domain_health and get_site. Clarify free account summaries, premium requirements, read-only domain and website access, and unsaved logo drafts. Generation uses existing AI credits."
+        "release_notes": "Use an existing Link in Bio site for the website review case and demo instead of requiring an owned domain or Gen website. Clarify that active premium trials qualify for domain and website detail access. Keep five positive and three negative cases, including one-design and four-design logo generation. Domain tools remain available but are outside this recording scenario."
       }
     }
   }

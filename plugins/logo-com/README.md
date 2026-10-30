@@ -7,7 +7,7 @@ Create a logo and brand basics (colors, fonts) from Claude, Codex, ChatGPT, or C
 ## Requirements
 
 - A LOGO.com account. Account summaries work on free plans.
-- Premium access for logo tools, plus creation permission and existing AI credits for generation. Domain and website detail tools require a paid premium plan for the selected organization. An account's `is_premium` flag alone does not guarantee access to those tools.
+- Premium access for logo tools, plus creation permission and existing AI credits for generation. Domain and website detail tools require a premium plan (including an active trial) for the selected organization. An account's `is_premium` flag alone does not guarantee access to those tools.
 - Your LOGO.com sign-in. Your client opens a LOGO.com sign-in page the first time it connects.
 
 ## Tools
@@ -37,7 +37,7 @@ The plugin isn't in the Cursor Marketplace yet. Once it's listed, install LOGO.c
 
 ## Troubleshooting
 
-- **A tool refuses your request.** Account summaries work on free plans. Logo tools require premium access; domain and website detail tools require a paid premium plan for the selected organization. Generation also needs existing AI credits and permission to create in your organization. Check your account at [logo.com](https://logo.com).
+- **A tool refuses your request.** Account summaries work on free plans. Logo tools require premium access; domain and website detail tools require a premium plan (including an active trial) for the selected organization. Generation also needs existing AI credits and permission to create in your organization. Check your account at [logo.com](https://logo.com).
 - **Sign-in fails, or the tools stop working.** Sign in again:
   - Claude Code: run `/mcp`, choose `plugin:logo-com:logo-com` and authenticate.
   - Claude on the web or desktop: open the plugin's **Connectors** tab and connect LOGO.com again.

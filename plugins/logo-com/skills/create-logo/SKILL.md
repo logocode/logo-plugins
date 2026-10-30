@@ -35,7 +35,7 @@ Create the logo here, then continue on logo.com for brand kit or a website.
 
 The plugin also exposes `get_account` for account summaries, plan details, AI credit balances and product counts on free or premium plans. It summarizes business email setup but does not read messages.
 
-For domain and website questions, use the read-only tools rather than generating a logo: resolve owned domains through `get_account`, inspect settings with `get_domain`, check live DNS health with `check_domain_health`, and list websites with `get_site` before inspecting a returned site ID. Domain and website detail tools require a paid premium plan for the selected organization. An account's `is_premium` flag alone does not establish that eligibility. Respect unavailable fields and truncated lists.
+For domain and website questions, use the read-only tools rather than generating a logo: resolve owned domains through `get_account`, inspect settings with `get_domain`, check live DNS health with `check_domain_health`, and list websites with `get_site` before inspecting a returned site ID. Domain and website detail tools require a premium plan (including an active trial) for the selected organization. An account's `is_premium` flag alone does not establish that eligibility. Respect unavailable fields and truncated lists.
 
 These tools do not change DNS, edit or publish websites, change subscriptions or buy credits. Report access errors without claiming the requested inspection succeeded.
 
