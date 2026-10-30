@@ -9,7 +9,7 @@ Plugins that connect Claude, Codex, ChatGPT and Cursor to [LOGO.com](https://log
 ## What you'll need
 
 - A LOGO.com account. Account summaries work on free plans.
-- Premium access for logo tools, plus creation permission and existing AI credits for generation. Domain and website detail tools require a paid premium plan for the selected organization. An account's `is_premium` flag alone does not guarantee access to those tools.
+- Premium access for logo tools, plus creation permission and existing AI credits for generation. Domain and website detail tools require a premium plan (including an active trial) for the selected organization. An account's `is_premium` flag alone does not guarantee access to those tools.
 - Your LOGO.com sign-in. Your client asks you to sign in the first time it connects.
 
 ## Install

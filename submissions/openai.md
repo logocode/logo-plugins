@@ -1,6 +1,6 @@
 # LOGO.com OpenAI review materials
 
-Status: package materials updated on 2026-10-29 to match the eight-tool MCP server. These repository changes have not been uploaded or submitted. Server generation failures and full reviewer-account testing remain to be resolved.
+Status: package materials updated on 2026-10-30 for a Link in Bio-only website review scenario. These changes have not been uploaded or submitted. Direct generation checks now complete, but visual brief adherence and full host review remain unresolved.
 
 The [Codex manifest](../plugins/logo-com/.codex-plugin/plugin.json) is the source of truth for listing copy, five positive cases, three negative cases, the commerce description, and release notes. Review metadata lives under `extensions.com.openai.review`; release notes live under `extensions.com.openai.publication`. The package retains the supported Codex manifest layout.
 
@@ -9,7 +9,7 @@ The [Codex manifest](../plugins/logo-com/.codex-plugin/plugin.json) is the sourc
 | Field | Value |
 | --- | --- |
 | Plugin identifier | `logo-com` |
-| Package version | `0.1.3` |
+| Package version | `0.1.4` |
 | Display name | LOGO.com |
 | Subtitle | Logos, domains & account |
 | Developer name | LOGO.com; confirm the matching verified identity in the portal |
@@ -33,7 +33,7 @@ The four public URLs were opened on 2026-10-29 and contain the corresponding LOG
 - `get_logo` returns a saved logo's colors, fonts, previews, editor link, and available high-resolution PNG, transparent PNG, SVG, and PDF download links.
 - `generate_logos` creates one to four draft designs from a business name and optional slogan, industry, style, colors, and icon idea. It consumes existing AI credits and can return a pending job.
 - `get_logo_generation` checks the returned job and may wait up to 25 seconds. Continue polling a pending job instead of creating another one.
-- Logo tools require premium user access. Domain and website detail tools require a paid premium plan for the selected organization; the account summary's `is_premium` flag alone does not prove eligibility. Generation also requires creation permission and sufficient existing AI credits. Run generation cases sequentially.
+- Logo tools require premium user access. Domain and website detail tools require a premium plan (including an active trial) for the selected organization; the account summary's `is_premium` flag alone does not prove eligibility. Generation also requires creation permission and sufficient existing AI credits. Run generation cases sequentially.
 - Editing and saving occur in the LOGO.com editor. Generated designs are not automatically saved logos.
 - The plugin does not create standalone photos, retrieve another company's official logos, change DNS, edit or publish websites, read email messages, export a full brand kit, change subscriptions, or sell credits.
 
@@ -62,7 +62,7 @@ P4 passes only when the generation completes with one design. P5 passes only whe
 | --- | --- | --- | --- |
 | P1 | Account summary, plan, credits and product inventory | `get_account` | Not run |
 | P2 | Browse saved logos, inspect colors/fonts and verify four download formats | `list_logos`, `get_logo` | Not run |
-| P3 | Owned-domain settings and DNS health, then website list and detail | `get_account`, `get_domain`, `check_domain_health`, `get_site` | Not run |
+| P3 | List and inspect an existing Link in Bio site | `get_site` | Not run |
 | P4 | Generate one design from a detailed bakery brief | `generate_logos`; `get_logo_generation` if pending | Not run |
 | P5 | Generate four cycling-shop options and follow progress | `generate_logos`; `get_logo_generation` if pending | Not run |
 | N1 | Standalone photograph | No LOGO.com tools | Not run |
@@ -76,14 +76,23 @@ Preparation checks on 2026-10-29 used the connected account, not a fresh host se
 - The one-design generation failed. The four-design generation returned two designs and two failures. Server logs reported `LOGO_RENDER_FAILED`. These outcomes do not pass P4 or P5. Resolve the server issue before authorized reruns.
 - Fresh-host prompt routing, the three negative cases and interactive editor behavior remain unverified. Direct tool responses do not establish those results.
 
+Latest direct checks on 2026-10-30 used the dedicated reviewer account:
+
+- Account summary, saved-logo list/detail, and Link in Bio list/detail succeeded. The sample one-page site was published and had no custom domain. Its earlier `PREMIUM_REQUIRED` refusal no longer occurs.
+- Both PNG variants, SVG and PDF completed downloads in the authenticated Work browser. File contents and editor interactions still need visual verification.
+- The one-design and four-design jobs completed with exactly five total designs and no render failures. Both initial tool responses reported completed, so a pending-job polling path was not exercised.
+- Visual inspection found a bull icon instead of the bakery brief's wheat stalk, and a dark icon with poor contrast in one cycling design. Successful rendering is not proof of brief adherence or visual quality. Keep these findings open rather than changing the prompts to conceal them.
+- The account summary showed no change in image or text credit balances immediately after these calls. This is only the observed balance, not proof of billing behavior.
+- Fresh-host prompt routing and all three negative cases remain unverified. Domain tools are still advertised server capabilities but are outside this recording scenario and were not exercised against an owned domain.
+
 ## Demo recording plan
 
 The owner is preparing the recording. Show real interactions in the intended ChatGPT or Codex host with sample data, using the package version selected for submission.
 
-1. Show LOGO.com connected without exposing credentials, OAuth tokens, or unrelated account data. Explain free account summaries, premium logo access, the paid organization requirement for domain/site details, and existing credits used for generation.
+1. Show LOGO.com connected without exposing credentials, OAuth tokens, or unrelated account data. Explain free account summaries, premium logo access, the premium organization requirement for domain/site details, including active trials, and existing credits used for generation.
 2. Run P1 and show the account summary, plan, credits and product counts.
 3. Run P2, compare the saved logo's colors and fonts with the editor, and open all four download links to verify the selected logo and formats.
-4. Run P3 against seeded domain and website fixtures. Show returned settings, live DNS health and publication/custom-domain status without making changes.
+4. Run P3 against the existing Link in Bio sample site. Show its URL, publication state and custom-domain status without making changes. Do not demonstrate Gen websites or domain tools.
 5. Run P4. Show the actual preview and open its editor link. Explain that saving is a separate editor action.
 6. After P4 finishes, run P5. If generation is pending, show polling of that same job. If it completes immediately, show the completed response without claiming the pending path was exercised. Show all returned designs and their corresponding editor links.
 7. Run N1, N2, and N3. Show the unsupported-request explanations and absence of LOGO.com tool calls.
@@ -93,7 +102,7 @@ Add the verified recording URL as `extensions.com.openai.review.demo_recording_u
 
 ## Remaining preparation
 
-- The owner is preparing reviewer access. Use a dedicated reviewer user with premium logo access and a selected organization on a paid premium plan. Seed owned sample logos with known colors, fonts and working downloads, an owned domain with known DNS configuration, and a website with known publication and custom-domain status. Provide sufficient existing credits for five designs and any separately authorized reruns.
+- The owner is preparing reviewer access. Use a dedicated reviewer user with premium logo access and a selected organization on a premium plan (including an active trial). Seed owned sample logos with known colors, fonts and working downloads, and an existing Link in Bio site with known publication and custom-domain status. No owned domain or Gen website is required for these cases. Provide sufficient existing credits for five designs and any separately authorized reruns.
 - Verify sign-in from a fresh browser without email or SMS codes, magic links, MFA approval, or access to a private network. Enter credentials and private sign-in instructions only in the portal.
 - Run all eight cases against that account and record pass/fail evidence privately. Resolve failures before submission.
 - Add and verify the demo recording URL.
@@ -102,7 +111,7 @@ Add the verified recording URL as `extensions.com.openai.review.demo_recording_u
 - Confirm the server sets `readOnlyHint`, `destructiveHint` and `openWorldHint` explicitly on every tool, as in the table under Capabilities and limits.
 - Confirm the message free accounts get doesn't promote an upgrade or link to checkout. Only a link to an informational plans page is allowed. [Guidelines](https://developers.openai.com/plugins/plugin-guidelines)
 - After the server fix, recheck all eight live tool schemas, annotations, OAuth metadata, UI metadata and server instructions against this package. Package wording cannot override server-owned definitions.
-- Version 0.1.3 avoids reusing the previously observed 0.1.2 portal draft. Verify the actual portal draft and imported fields before upload; its current state has not been rechecked.
+- Version 0.1.4 contains the Link in Bio case update. The personal browser directory still showed cloud package 0.1.1 with a desktop-only launch option during preflight. Verify the portal draft and imported fields before upload; the directory entry does not establish the current submission draft state.
 
 ## Package and portal handoff
 

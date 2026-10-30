@@ -1,8 +1,8 @@
 {
   "name": "logo-com",
   "displayName": "LOGO.com",
-  "version": "0.1.3",
-  "description": "Create and browse logos, inspect colors, fonts and downloads, and read your LOGO.com account, domain health and website status. Generate one to four draft logo designs using existing AI credits. Account summaries work on free plans. Logo tools require premium access; domain and website details require a paid premium plan for the selected organization. Website publishing, DNS changes, subscription changes and credit purchases are not supported.",
+  "version": "0.1.4",
+  "description": "Create and browse logos, inspect colors, fonts and downloads, and read your LOGO.com account, domain health and website status. Generate one to four draft logo designs using existing AI credits. Account summaries work on free plans. Logo tools require premium access; domain and website details require a premium plan (including an active trial) for the selected organization. Website publishing, DNS changes, subscription changes and credit purchases are not supported.",
   "author": {
     "name": "LOGO.com"
   },
